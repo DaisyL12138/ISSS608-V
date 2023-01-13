@@ -1,0 +1,28 @@
+---
+title: "Hands-Ex01"
+author: "Daisy"
+editor: visual
+---
+
+# Getting Started
+
+```{r}
+pacman::p_load(tidyverse)
+```
+
+## Importing the data
+
+```{r}
+
+#| eval: false
+exam_data <- read_csv("data/Exam_data.csv")
+```
+
+## Plotting a bar chart
+
+```{r}
+#| eval: false
+ggplot(data=exam_data,
+       aes(x=RACE))+
+  geom_bar()
+```
