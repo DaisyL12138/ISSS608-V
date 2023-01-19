@@ -38,6 +38,6 @@ ggplot(data=exam_data, aes(x = MATHS)) +
                  fill="pink") +
   ggtitle("Distribution of Maths scores")
 
-?geom_histogram
+
 ```
 

@@ -10,8 +10,7 @@ website:
         - text: "Hands-on 1"
           href: "Hands-on-Ex/Hands-on-Ex01/Hands-Ex01.qmd"
         - text: "Hands-on 2"
-          href: "Hands-on-Ex/Hands-on-Ex01/Hands-Ex01.qmd"
-          #href: "Hands-on-Ex/Hands-on-Ex02/Hands-Ex02.qmd"
+          href: "Hands-on-Ex/Hands-on-Ex02/Hands-Ex02.qmd"
     - text: "Take Home Exercise"
       menu:
         - text: "Take-Home 1"
