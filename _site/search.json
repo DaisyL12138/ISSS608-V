@@ -25,6 +25,6 @@
     "href": "take-home-ex/take-home-1/take-home-01.html",
     "title": "Take Home Ex 01",
     "section": "",
-    "text": "The Procedures\n\n\n\n\n\n\n\nSteps\nScreenshot\n\n\n\n\n12hcglihh vlihlugku gjkugjgujg ,khj,fcxukciv vu kuhvkulhkvugjkgj,vhmgjvu,yjcxhtcy\njgvukuvhuggcvghvi,uvku\n\n\n\n123\n\n\n\n1\n1"
+    "text": "The Procedures\n\n\n\nSteps\nScreenshot\n\n\n\n\n\nLoad the popdata.csv file into Tableau Desktop.\n\n\n\n\n\nIn order to create the age-sex pyramid, we need the age group,which is the discrete value, instead of continuous value.So, from the ‘data source’ panel, right click on the ‘PA’ and click on ‘create group’. The criteria to make groups is referred to website PopulationPyramid.Net\n\n\n\n\n\n\n\n\n\n\n1"
   }
 ]
