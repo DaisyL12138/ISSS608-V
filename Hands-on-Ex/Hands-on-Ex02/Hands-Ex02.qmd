@@ -1,11 +1,8 @@
 ---
-title: "Hands-Ex02"
+title: "Hands-Ex02:Creating Elegent Graghs with ggplot2"
+date: "`r Sys.Date()`"
 editor: visual
 ---
-
-
-
-## not written yet!!!!!!!
 
 ```{r}
 

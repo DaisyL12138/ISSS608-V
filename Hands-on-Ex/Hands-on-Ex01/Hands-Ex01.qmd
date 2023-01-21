@@ -30,6 +30,7 @@ ggplot(data=exam_data,
 ```{r}
 hist(exam_data$MATHS)
 ```
+
 ```{r}
 ggplot(data=exam_data, aes(x = MATHS)) +
   geom_histogram(bins=15, 
@@ -40,4 +41,3 @@ ggplot(data=exam_data, aes(x = MATHS)) +
 
 
 ```
-
