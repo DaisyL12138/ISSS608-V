@@ -9,7 +9,7 @@
 <meta name="author" content="Daisy">
 <meta name="dcterms.date" content="2023-01-25">
 
-<title>ISSS608-VAA - Hands-Ex01</title>
+<title>ISSS608-VAA - take-home-2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -199,10 +199,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">1 Overview</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">2 Data Preparation</a></li>
+  <li><a href="#age-sex-pyramid-using-trellis-display-critique-and-remake" id="toc-age-sex-pyramid-using-trellis-display-critique-and-remake" class="nav-link" data-scroll-target="#age-sex-pyramid-using-trellis-display-critique-and-remake">3 Age-Sex Pyramid Using Trellis Display Critique and Remake</a>
   <ul class="collapse">
-  <li><a href="#importing-the-data" id="toc-importing-the-data" class="nav-link" data-scroll-target="#importing-the-data">Importing the data</a></li>
-  <li><a href="#plotting-a-bar-chart" id="toc-plotting-a-bar-chart" class="nav-link" data-scroll-target="#plotting-a-bar-chart">Plotting a bar chart</a></li>
+  <li><a href="#critique" id="toc-critique" class="nav-link" data-scroll-target="#critique"><strong>3.1 Critique</strong></a></li>
+  <li><a href="#remake" id="toc-remake" class="nav-link" data-scroll-target="#remake"><strong>3.2 Remake</strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -212,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hands-Ex01</h1>
+<h1 class="title">take-home-2</h1>
 </div>
 
 
@@ -239,50 +241,147 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="getting-started" class="level1">
-<h1>Getting Started</h1>
+<section id="overview" class="level1">
+<h1>1 Overview</h1>
+<p>This take-home exercise is done based on a take-home exercise 1 submission prepared by a classmate. The peer submission will be critiqued in terms of clarity and aesthetics, and the original design will be remade using the data visualization principles and best practice learnt in Lesson 1 and 2.</p>
+<p>The dataset used is downloaded from <a href="https://www.singstat.gov.sg/">Department of Statistics, Singapore</a>, and processed by RStudio <code>tidyverse</code> family of packages and visualized by <code>ggplot2</code> and its extensions.</p>
+</section>
+<section id="data-preparation" class="level1">
+<h1>2 Data Preparation</h1>
+<p>Installing packages and loading libraries:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="importing-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="importing-the-data">Importing the data</h2>
+<p>Import data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>exam_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Exam_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"popdata.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 322 Columns: 7
+<pre><code>Warning: One or more parsing issues, see `problems()` for details</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 60424 Columns: 6
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (4): ID, CLASS, GENDER, RACE
-dbl (3): ENGLISH, MATHS, SCIENCE
+chr (4): PA, SZ, Age, Sex
+dbl (2): Pop, Time
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(popdata,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 6
+   PA         SZ                     Age   Sex       Pop  Time
+   &lt;chr&gt;      &lt;chr&gt;                  &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+ 1 Ang Mo Kio Ang Mo Kio Town Centre 0     Males      10  2022
+ 2 Ang Mo Kio Ang Mo Kio Town Centre 0     Females    10  2022
+ 3 Ang Mo Kio Ang Mo Kio Town Centre 1     Males      20  2022
+ 4 Ang Mo Kio Ang Mo Kio Town Centre 1     Females    10  2022
+ 5 Ang Mo Kio Ang Mo Kio Town Centre 2     Males      20  2022
+ 6 Ang Mo Kio Ang Mo Kio Town Centre 2     Females    10  2022
+ 7 Ang Mo Kio Ang Mo Kio Town Centre 3     Males      20  2022
+ 8 Ang Mo Kio Ang Mo Kio Town Centre 3     Females    10  2022
+ 9 Ang Mo Kio Ang Mo Kio Town Centre 4     Males      30  2022
+10 Ang Mo Kio Ang Mo Kio Town Centre 4     Females    30  2022</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span> <span class="fu">transform</span>(popdata,<span class="at">Age=</span><span class="fu">as.numeric</span>(Age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in eval(substitute(list(...)), `_data`, parent.frame()): NAs introduced
+by coercion</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(popdata,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           PA                     SZ Age     Sex Pop Time
+1  Ang Mo Kio Ang Mo Kio Town Centre   0   Males  10 2022
+2  Ang Mo Kio Ang Mo Kio Town Centre   0 Females  10 2022
+3  Ang Mo Kio Ang Mo Kio Town Centre   1   Males  20 2022
+4  Ang Mo Kio Ang Mo Kio Town Centre   1 Females  10 2022
+5  Ang Mo Kio Ang Mo Kio Town Centre   2   Males  20 2022
+6  Ang Mo Kio Ang Mo Kio Town Centre   2 Females  10 2022
+7  Ang Mo Kio Ang Mo Kio Town Centre   3   Males  20 2022
+8  Ang Mo Kio Ang Mo Kio Town Centre   3 Females  10 2022
+9  Ang Mo Kio Ang Mo Kio Town Centre   4   Males  30 2022
+10 Ang Mo Kio Ang Mo Kio Town Centre   4 Females  30 2022</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>popdata<span class="ot">&lt;-</span>popdata<span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age_group =</span> <span class="fu">cut</span>(Age, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">14</span>,<span class="dv">19</span>,<span class="dv">24</span>,<span class="dv">39</span>,<span class="dv">44</span>,<span class="dv">49</span>,<span class="dv">54</span>,<span class="dv">59</span>,<span class="dv">64</span>,<span class="dv">69</span>,<span class="dv">74</span>,<span class="dv">79</span>,<span class="dv">84</span>,<span class="dv">89</span>,<span class="cn">Inf</span>)))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(popdata,<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           PA                     SZ Age     Sex Pop Time Age_group
+1  Ang Mo Kio Ang Mo Kio Town Centre   0   Males  10 2022  (-Inf,4]
+2  Ang Mo Kio Ang Mo Kio Town Centre   0 Females  10 2022  (-Inf,4]
+3  Ang Mo Kio Ang Mo Kio Town Centre   1   Males  20 2022  (-Inf,4]
+4  Ang Mo Kio Ang Mo Kio Town Centre   1 Females  10 2022  (-Inf,4]
+5  Ang Mo Kio Ang Mo Kio Town Centre   2   Males  20 2022  (-Inf,4]
+6  Ang Mo Kio Ang Mo Kio Town Centre   2 Females  10 2022  (-Inf,4]
+7  Ang Mo Kio Ang Mo Kio Town Centre   3   Males  20 2022  (-Inf,4]
+8  Ang Mo Kio Ang Mo Kio Town Centre   3 Females  10 2022  (-Inf,4]
+9  Ang Mo Kio Ang Mo Kio Town Centre   4   Males  30 2022  (-Inf,4]
+10 Ang Mo Kio Ang Mo Kio Town Centre   4 Females  30 2022  (-Inf,4]
+11 Ang Mo Kio Ang Mo Kio Town Centre   5   Males  20 2022     (4,9]
+12 Ang Mo Kio Ang Mo Kio Town Centre   5 Females  20 2022     (4,9]
+13 Ang Mo Kio Ang Mo Kio Town Centre   6   Males  30 2022     (4,9]
+14 Ang Mo Kio Ang Mo Kio Town Centre   6 Females  30 2022     (4,9]
+15 Ang Mo Kio Ang Mo Kio Town Centre   7   Males  20 2022     (4,9]
+16 Ang Mo Kio Ang Mo Kio Town Centre   7 Females  20 2022     (4,9]
+17 Ang Mo Kio Ang Mo Kio Town Centre   8   Males  20 2022     (4,9]
+18 Ang Mo Kio Ang Mo Kio Town Centre   8 Females  20 2022     (4,9]
+19 Ang Mo Kio Ang Mo Kio Town Centre   9   Males  30 2022     (4,9]
+20 Ang Mo Kio Ang Mo Kio Town Centre   9 Females  30 2022     (4,9]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pop<span class="ot">=</span>popdata <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(PA)  <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">summarise</span>(<span class="at">Pop =</span> <span class="fu">sum</span>(Pop),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">top_n</span>(pop,<span class="dv">9</span>,Pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 2
+  PA               Pop
+  &lt;chr&gt;          &lt;dbl&gt;
+1 Bedok         278970
+2 Bukit Batok   165280
+3 Choa Chu Kang 190780
+4 Hougang       227610
+5 Jurong West   258700
+6 Punggol       186270
+7 Sengkang      253250
+8 Woodlands     252570
+9 Yishun        223340</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span><span class="fu">filter</span>(popdata,PA <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Bedok"</span>,<span class="st">"Jurong West"</span>,<span class="st">"Yishun"</span>,<span class="st">"Punggol"</span>,<span class="st">'Bukit Batok'</span>,<span class="st">"Woodlands"</span>,<span class="st">"Sengkang"</span>,<span class="st">"Hougang"</span>,<span class="st">"Choa Chu Kang"</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span> popdata[<span class="sc">!</span><span class="fu">is.na</span>(popdata<span class="sc">$</span>Age_group),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="plotting-a-bar-chart" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-a-bar-chart">Plotting a bar chart</h2>
+<section id="age-sex-pyramid-using-trellis-display-critique-and-remake" class="level1">
+<h1>3 Age-Sex Pyramid Using Trellis Display Critique and Remake</h1>
+<section id="critique" class="level2">
+<h2 class="anchored" data-anchor-id="critique"><strong>3.1 Critique</strong></h2>
+</section>
+<section id="remake" class="level2">
+<h2 class="anchored" data-anchor-id="remake"><strong>3.2 Remake</strong></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span>RACE))<span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>popdata, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span>Age_group,<span class="at">fill=</span>Sex,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fu">ifelse</span>(<span class="at">test =</span> Sex <span class="sc">==</span> <span class="st">"Males"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">yes =</span> <span class="sc">-</span>Pop, <span class="at">no =</span> Pop))) <span class="sc">+</span> </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">'Identity'</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs, <span class="at">limits =</span> <span class="fu">max</span>(popdata<span class="sc">$</span>Pop) <span class="sc">*</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Population Amount"</span>) <span class="sc">+</span> </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> PA) <span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 9064 rows containing missing values (`geom_bar()`).</code></pre>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(exam_data<span class="sc">$</span>MATHS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Hands-Ex01_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, <span class="fu">aes</span>(<span class="at">x =</span> MATHS)) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">15</span>, </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">boundary =</span> <span class="dv">1</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"white"</span>, </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"pink"</span>) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Maths scores"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Hands-Ex01_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="take-home-2_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 

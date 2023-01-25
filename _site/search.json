@@ -26,5 +26,33 @@
     "title": "Take Home Ex 01",
     "section": "",
     "text": "The Procedures\n\n\n\nSteps\nScreenshot\n\n\n\n\n\nLoad the popdata.csv file into Tableau Desktop.\n\n\n\n\n\nIn order to create the age-sex pyramid, we need the age group,which is the discrete value, instead of continuous value.So, from the ‘data source’ panel, right click on the ‘PA’ and click on ‘create group’. The criteria to make groups is referred to website PopulationPyramid.Net\n\n\n\n\n\nFrom ‘Data’ panel, click on the little downside triangle, and click on ‘create parameter’.\n\n\n\n\n\nCreate a new parameter called ‘female’, which is the total population of female.\n\n\n\n\n\nCreate a new parameter called ‘male’,which is the total population of male.\n\n\n\n\n\nDrag ‘female’and ’male’ to Columns, ‘PA’ and ‘Age (group)’ to Rows, drag ‘Sex’to colour.Then right click on the title ’PA’ and click on ‘sort’, choose sort by ‘Field’, in descending order and field name is ‘pop’ which is the total population.\n\n\n\n\n\nThen, right click on ‘PA’, click ‘Filter’. Choose the top 9 area with the highest population.\n\n\n\n\n\nRight click on ‘Age (group)’, then click ‘Filter’. Check ‘Null’ and check ‘Exclude’.\n\n\n\n\n\nClick on ‘Data’ at the top of the window, then choose ‘Extract Data’.\n\n\n\n\n\nClick on ‘Extract’\n\n\n\n\n\nClick on ‘Server’ at the top, choose ‘Tableau Public’,then ‘Save to Tableau Public’.\n\n\n\n\n\nIf not satisfied, click on ‘Color’ under Marks card, click ‘Edit Colors’, then pick more pretty ones.\n\n\n\n\n\nClick on white space of the ‘PA’ column, click on ‘Format’, and give a shading to this column.\nPublic again."
+  },
+  {
+    "objectID": "take-home-ex/take-home-2/take-home-2.html",
+    "href": "take-home-ex/take-home-2/take-home-2.html",
+    "title": "take-home-2",
+    "section": "",
+    "text": "This take-home exercise is done based on a take-home exercise 1 submission prepared by a classmate. The peer submission will be critiqued in terms of clarity and aesthetics, and the original design will be remade using the data visualization principles and best practice learnt in Lesson 1 and 2.\nThe dataset used is downloaded from Department of Statistics, Singapore, and processed by RStudio tidyverse family of packages and visualized by ggplot2 and its extensions."
+  },
+  {
+    "objectID": "take-home-ex/take-home-2/take-home-2.html#age-sex-pyramid-using-trellis-display",
+    "href": "take-home-ex/take-home-2/take-home-2.html#age-sex-pyramid-using-trellis-display",
+    "title": "take-home-2",
+    "section": "3.1 Age-Sex Pyramid Using Trellis Display",
+    "text": "3.1 Age-Sex Pyramid Using Trellis Display"
+  },
+  {
+    "objectID": "take-home-ex/take-home-2/take-home-2.html#critique",
+    "href": "take-home-ex/take-home-2/take-home-2.html#critique",
+    "title": "take-home-2",
+    "section": "3.1 Critique",
+    "text": "3.1 Critique"
+  },
+  {
+    "objectID": "take-home-ex/take-home-2/take-home-2.html#remake",
+    "href": "take-home-ex/take-home-2/take-home-2.html#remake",
+    "title": "take-home-2",
+    "section": "3.2 Remake",
+    "text": "3.2 Remake\n\nggplot(data=popdata, \n       aes(x=Age_group,fill=Sex,\n           y = ifelse(test = Sex == \"Males\",\n                            yes = -Pop, no = Pop))) + \n geom_bar(stat = 'Identity') +\n  scale_y_continuous(labels = abs, limits = max(popdata$Pop) * c(-1,1)) +\n  labs(y = \"Population Amount\") + \n  coord_flip()+\n  facet_wrap(~ PA) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1)) \n\nWarning: Removed 9064 rows containing missing values (`geom_bar()`)."
   }
 ]

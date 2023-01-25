@@ -1,0 +1,72 @@
+---
+title: "take-home-2"
+author: "Daisy"
+date: "`r Sys.Date()`"
+editor: visual
+---
+
+# 1 Overview
+
+This take-home exercise is done based on a take-home exercise 1 submission prepared by a classmate. The peer submission will be critiqued in terms of clarity and aesthetics, and the original design will be remade using the data visualization principles and best practice learnt in Lesson 1 and 2.
+
+The dataset used is downloaded from [Department of Statistics, Singapore](https://www.singstat.gov.sg/), and processed by RStudio `tidyverse` family of packages and visualized by `ggplot2` and its extensions.
+
+# 2 Data Preparation
+
+Installing packages and loading libraries:
+
+```{r}
+pacman::p_load(tidyverse)
+```
+
+Import data:
+
+```{r}
+popdata <- read_csv("popdata.csv")
+head(popdata,10)
+```
+
+```{r}
+popdata <- transform(popdata,Age=as.numeric(Age))
+head(popdata,10)
+
+```
+
+```{r}
+popdata<-popdata%>%
+  mutate(Age_group = cut(Age, breaks = c(-Inf,4,9,14,19,24,39,44,49,54,59,64,69,74,79,84,89,Inf)))
+head(popdata,20)
+```
+
+```{r}
+pop=popdata %>% group_by(PA)  %>%
+                    summarise(Pop = sum(Pop),
+                              .groups = 'drop')
+top_n(pop,9,Pop)
+```
+
+```{r}
+popdata <-filter(popdata,PA %in% c("Bedok","Jurong West","Yishun","Punggol",'Bukit Batok',"Woodlands","Sengkang","Hougang","Choa Chu Kang"))
+popdata <- popdata[!is.na(popdata$Age_group),]
+
+```
+
+# 3 Age-Sex Pyramid Using Trellis Display Critique and Remake
+
+## **3.1 Critique**
+
+## **3.2 Remake**
+
+```{r}
+ggplot(data=popdata, 
+       aes(x=Age_group,fill=Sex,
+           y = ifelse(test = Sex == "Males",
+                            yes = -Pop, no = Pop))) + 
+ geom_bar(stat = 'Identity') +
+  scale_y_continuous(labels = abs, limits = max(popdata$Pop) * c(-1,1)) +
+  labs(y = "Population Amount") + 
+  coord_flip()+
+  facet_wrap(~ PA) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+
+```
