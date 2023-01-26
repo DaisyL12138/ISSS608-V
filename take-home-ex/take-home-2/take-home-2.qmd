@@ -13,20 +13,20 @@ The dataset used is downloaded from [Department of Statistics, Singapore](https:
 
 # 2 Data Preparation
 
-Installing packages and loading libraries:
+## 2.1 Installing packages and loading libraries
 
 ```{r}
 pacman::p_load(tidyverse)
 ```
 
-Import data:
+## 2.2 Import data
 
 ```{r}
 popdata <- read_csv("popdata.csv")
 head(popdata,10)
 ```
 
-Change the data type of 'Age' from strings to numeric:
+## 2.3 Change the data type of 'Age' from strings to numeric
 
 ```{r}
 popdata <- transform(popdata,Age=as.numeric(Age))
@@ -34,7 +34,7 @@ popdata <- transform(popdata,Age=as.numeric(Age))
 
 ```
 
-Group 'Age' in to 'Age_group':
+## 2.4 Group 'Age' in to 'Age_group'
 
 ```{r}
 popdata<-popdata%>%
@@ -47,7 +47,7 @@ popdata<-popdata%>%
 head(popdata,10)
 ```
 
-Check the top 9 planing area with the most population:
+## 2.5 Check the top 9 planing area with the most population
 
 ```{r}
 pop=popdata %>% group_by(PA)  %>%
@@ -56,7 +56,7 @@ pop=popdata %>% group_by(PA)  %>%
 top_n(pop,9,Pop)
 ```
 
-Filter the planing area:
+## 2.6 Filter the planing area
 
 ```{r}
 popdata <-filter(popdata,PA %in% c("Bedok","Jurong West","Yishun","Punggol",'Bukit Batok',"Woodlands","Sengkang","Hougang","Choa Chu Kang"))
@@ -76,7 +76,7 @@ The graph below is an Age-Sex Pyramid made by a classmate
 
 -   The graph is generally clear in terms of x-axis labels, planning area labels and overall layout. The audience is able to gasp the general trend of population distribution of each planning area.
 
--   Y-axis label \'AG\' is an acronym, which is vague, can be improved by using 'Age Group'. And the group name was compressed, this will bring problem for the audience.
+-   Y-axis label 'AG' is an acronym, which is vague, can be improved by using 'Age Group'. And the group name was compressed, this will bring problem for the audience.
 
 -   Some value labels are blocked and some groups have labels but others do not.
 

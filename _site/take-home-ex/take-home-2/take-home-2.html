@@ -200,7 +200,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">1 Overview</a></li>
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">2 Data Preparation</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">2 Data Preparation</a>
+  <ul class="collapse">
+  <li><a href="#installing-packages-and-loading-libraries" id="toc-installing-packages-and-loading-libraries" class="nav-link" data-scroll-target="#installing-packages-and-loading-libraries">2.1 Installing packages and loading libraries</a></li>
+  <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">2.2 Import data</a></li>
+  <li><a href="#change-the-data-type-of-age-from-strings-to-numeric" id="toc-change-the-data-type-of-age-from-strings-to-numeric" class="nav-link" data-scroll-target="#change-the-data-type-of-age-from-strings-to-numeric">2.3 Change the data type of ‘Age’ from strings to numeric</a></li>
+  <li><a href="#group-age-in-to-age_group" id="toc-group-age-in-to-age_group" class="nav-link" data-scroll-target="#group-age-in-to-age_group">2.4 Group ‘Age’ in to ‘Age_group’</a></li>
+  <li><a href="#check-the-top-9-planing-area-with-the-most-population" id="toc-check-the-top-9-planing-area-with-the-most-population" class="nav-link" data-scroll-target="#check-the-top-9-planing-area-with-the-most-population">2.5 Check the top 9 planing area with the most population</a></li>
+  <li><a href="#filter-the-planing-area" id="toc-filter-the-planing-area" class="nav-link" data-scroll-target="#filter-the-planing-area">2.6 Filter the planing area</a></li>
+  </ul></li>
   <li><a href="#age-sex-pyramid-using-trellis-display-critique-and-remake" id="toc-age-sex-pyramid-using-trellis-display-critique-and-remake" class="nav-link" data-scroll-target="#age-sex-pyramid-using-trellis-display-critique-and-remake">3 Age-Sex Pyramid Using Trellis Display Critique and Remake</a>
   <ul class="collapse">
   <li><a href="#critique" id="toc-critique" class="nav-link" data-scroll-target="#critique"><strong>3.1 Critique</strong></a></li>
@@ -248,11 +256,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="data-preparation" class="level1">
 <h1>2 Data Preparation</h1>
-<p>Installing packages and loading libraries:</p>
+<section id="installing-packages-and-loading-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="installing-packages-and-loading-libraries">2.1 Installing packages and loading libraries</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Import data:</p>
+</section>
+<section id="import-data" class="level2">
+<h2 class="anchored" data-anchor-id="import-data">2.2 Import data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"popdata.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -285,7 +296,9 @@ dbl (2): Pop, Time
 10 Ang Mo Kio Ang Mo Kio Town Centre 4     Females    30  2022</code></pre>
 </div>
 </div>
-<p>Change the data type of ‘Age’ from strings to numeric:</p>
+</section>
+<section id="change-the-data-type-of-age-from-strings-to-numeric" class="level2">
+<h2 class="anchored" data-anchor-id="change-the-data-type-of-age-from-strings-to-numeric">2.3 Change the data type of ‘Age’ from strings to numeric</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span> <span class="fu">transform</span>(popdata,<span class="at">Age=</span><span class="fu">as.numeric</span>(Age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -293,7 +306,9 @@ dbl (2): Pop, Time
 by coercion</code></pre>
 </div>
 </div>
-<p>Group ‘Age’ in to ‘Age_group’:</p>
+</section>
+<section id="group-age-in-to-age_group" class="level2">
+<h2 class="anchored" data-anchor-id="group-age-in-to-age_group">2.4 Group ‘Age’ in to ‘Age_group’</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>popdata<span class="ot">&lt;-</span>popdata<span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age_group =</span> <span class="fu">cut</span>(Age, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">14</span>,<span class="dv">19</span>,<span class="dv">24</span>,<span class="dv">29</span>,<span class="dv">34</span>,<span class="dv">39</span>,<span class="dv">44</span>,<span class="dv">49</span>,<span class="dv">54</span>,<span class="dv">59</span>,<span class="dv">64</span>,<span class="dv">69</span>,<span class="dv">74</span>,<span class="dv">79</span>,<span class="dv">84</span>,<span class="dv">89</span>),</span>
@@ -317,7 +332,9 @@ by coercion</code></pre>
 10 Ang Mo Kio Ang Mo Kio Town Centre   4 Females  30 2022    0 to 4</code></pre>
 </div>
 </div>
-<p>Check the top 9 planing area with the most population:</p>
+</section>
+<section id="check-the-top-9-planing-area-with-the-most-population" class="level2">
+<h2 class="anchored" data-anchor-id="check-the-top-9-planing-area-with-the-most-population">2.5 Check the top 9 planing area with the most population</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pop<span class="ot">=</span>popdata <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(PA)  <span class="sc">%&gt;%</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">summarise</span>(<span class="at">Pop =</span> <span class="fu">sum</span>(Pop),</span>
@@ -338,11 +355,14 @@ by coercion</code></pre>
 9 Yishun        223340</code></pre>
 </div>
 </div>
-<p>Filter the planing area:</p>
+</section>
+<section id="filter-the-planing-area" class="level2">
+<h2 class="anchored" data-anchor-id="filter-the-planing-area">2.6 Filter the planing area</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span><span class="fu">filter</span>(popdata,PA <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Bedok"</span>,<span class="st">"Jurong West"</span>,<span class="st">"Yishun"</span>,<span class="st">"Punggol"</span>,<span class="st">'Bukit Batok'</span>,<span class="st">"Woodlands"</span>,<span class="st">"Sengkang"</span>,<span class="st">"Hougang"</span>,<span class="st">"Choa Chu Kang"</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span> popdata[<span class="sc">!</span><span class="fu">is.na</span>(popdata<span class="sc">$</span>Age_group),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
 </section>
 <section id="age-sex-pyramid-using-trellis-display-critique-and-remake" class="level1">
 <h1>3 Age-Sex Pyramid Using Trellis Display Critique and Remake</h1>
@@ -353,7 +373,7 @@ by coercion</code></pre>
 <p><strong>Clarity</strong></p>
 <ul>
 <li><p>The graph is generally clear in terms of x-axis labels, planning area labels and overall layout. The audience is able to gasp the general trend of population distribution of each planning area.</p></li>
-<li><p>Y-axis label 'AG' is an acronym, which is vague, can be improved by using ‘Age Group’. And the group name was compressed, this will bring problem for the audience.</p></li>
+<li><p>Y-axis label ‘AG’ is an acronym, which is vague, can be improved by using ‘Age Group’. And the group name was compressed, this will bring problem for the audience.</p></li>
 <li><p>Some value labels are blocked and some groups have labels but others do not.</p></li>
 <li><p>The ‘Column’ and ‘Row’ should be hided.</p></li>
 <li><p>The title of the graph should be bold and bigger</p></li>
