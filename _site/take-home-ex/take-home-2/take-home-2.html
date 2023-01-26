@@ -285,6 +285,7 @@ dbl (2): Pop, Time
 10 Ang Mo Kio Ang Mo Kio Town Centre 4     Females    30  2022</code></pre>
 </div>
 </div>
+<p>Change the data type of ‘Age’ from strings to numeric:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span> <span class="fu">transform</span>(popdata,<span class="at">Age=</span><span class="fu">as.numeric</span>(Age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -292,119 +293,31 @@ dbl (2): Pop, Time
 by coercion</code></pre>
 </div>
 </div>
+<p>Group ‘Age’ in to ‘Age_group’:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>popdata<span class="ot">&lt;-</span>popdata<span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age_group =</span> <span class="fu">cut</span>(Age, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">14</span>,<span class="dv">19</span>,<span class="dv">24</span>,<span class="dv">29</span>,<span class="dv">34</span>,<span class="dv">39</span>,<span class="dv">44</span>,<span class="dv">49</span>,<span class="dv">54</span>,<span class="dv">59</span>,<span class="dv">64</span>,<span class="dv">69</span>,<span class="dv">74</span>,<span class="dv">79</span>,<span class="dv">84</span>,<span class="dv">89</span>),</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">include.lowest =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">include.highest=</span><span class="cn">TRUE</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#labels = c("0 to 4", "5 to 9", "10 to 14", "15 to 19","20 to 24",,,,,,,),</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0 to 4"</span>, <span class="st">"5 to 9"</span>, <span class="st">"10 to 14"</span>, <span class="st">"15 to 19"</span>,<span class="st">"20 to 24"</span>,<span class="st">"25 to 29"</span>,<span class="st">"30 to 34"</span>,<span class="st">"35 to 39"</span>,<span class="st">"40 to 44"</span>,<span class="st">"45 to 49"</span>,<span class="st">"50 to 54"</span>,<span class="st">"55 to 59"</span>,<span class="st">"60 to 64"</span>,<span class="st">"65 to 69"</span>,<span class="st">"70 to 74"</span>,<span class="st">"75 to 79"</span>,<span class="st">"80 to 84"</span>,<span class="st">"85 to 89"</span>)</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                         </span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                         ))</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(popdata,<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(popdata,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            PA                     SZ Age     Sex Pop Time Age_group
-1   Ang Mo Kio Ang Mo Kio Town Centre   0   Males  10 2022     [0,4]
-2   Ang Mo Kio Ang Mo Kio Town Centre   0 Females  10 2022     [0,4]
-3   Ang Mo Kio Ang Mo Kio Town Centre   1   Males  20 2022     [0,4]
-4   Ang Mo Kio Ang Mo Kio Town Centre   1 Females  10 2022     [0,4]
-5   Ang Mo Kio Ang Mo Kio Town Centre   2   Males  20 2022     [0,4]
-6   Ang Mo Kio Ang Mo Kio Town Centre   2 Females  10 2022     [0,4]
-7   Ang Mo Kio Ang Mo Kio Town Centre   3   Males  20 2022     [0,4]
-8   Ang Mo Kio Ang Mo Kio Town Centre   3 Females  10 2022     [0,4]
-9   Ang Mo Kio Ang Mo Kio Town Centre   4   Males  30 2022     [0,4]
-10  Ang Mo Kio Ang Mo Kio Town Centre   4 Females  30 2022     [0,4]
-11  Ang Mo Kio Ang Mo Kio Town Centre   5   Males  20 2022     (4,9]
-12  Ang Mo Kio Ang Mo Kio Town Centre   5 Females  20 2022     (4,9]
-13  Ang Mo Kio Ang Mo Kio Town Centre   6   Males  30 2022     (4,9]
-14  Ang Mo Kio Ang Mo Kio Town Centre   6 Females  30 2022     (4,9]
-15  Ang Mo Kio Ang Mo Kio Town Centre   7   Males  20 2022     (4,9]
-16  Ang Mo Kio Ang Mo Kio Town Centre   7 Females  20 2022     (4,9]
-17  Ang Mo Kio Ang Mo Kio Town Centre   8   Males  20 2022     (4,9]
-18  Ang Mo Kio Ang Mo Kio Town Centre   8 Females  20 2022     (4,9]
-19  Ang Mo Kio Ang Mo Kio Town Centre   9   Males  30 2022     (4,9]
-20  Ang Mo Kio Ang Mo Kio Town Centre   9 Females  30 2022     (4,9]
-21  Ang Mo Kio Ang Mo Kio Town Centre  10   Males  40 2022    (9,14]
-22  Ang Mo Kio Ang Mo Kio Town Centre  10 Females  30 2022    (9,14]
-23  Ang Mo Kio Ang Mo Kio Town Centre  11   Males  30 2022    (9,14]
-24  Ang Mo Kio Ang Mo Kio Town Centre  11 Females  20 2022    (9,14]
-25  Ang Mo Kio Ang Mo Kio Town Centre  12   Males  20 2022    (9,14]
-26  Ang Mo Kio Ang Mo Kio Town Centre  12 Females  30 2022    (9,14]
-27  Ang Mo Kio Ang Mo Kio Town Centre  13   Males  30 2022    (9,14]
-28  Ang Mo Kio Ang Mo Kio Town Centre  13 Females  40 2022    (9,14]
-29  Ang Mo Kio Ang Mo Kio Town Centre  14   Males  20 2022    (9,14]
-30  Ang Mo Kio Ang Mo Kio Town Centre  14 Females  40 2022    (9,14]
-31  Ang Mo Kio Ang Mo Kio Town Centre  15   Males  30 2022   (14,19]
-32  Ang Mo Kio Ang Mo Kio Town Centre  15 Females  30 2022   (14,19]
-33  Ang Mo Kio Ang Mo Kio Town Centre  16   Males  20 2022   (14,19]
-34  Ang Mo Kio Ang Mo Kio Town Centre  16 Females  30 2022   (14,19]
-35  Ang Mo Kio Ang Mo Kio Town Centre  17   Males  40 2022   (14,19]
-36  Ang Mo Kio Ang Mo Kio Town Centre  17 Females  30 2022   (14,19]
-37  Ang Mo Kio Ang Mo Kio Town Centre  18   Males  30 2022   (14,19]
-38  Ang Mo Kio Ang Mo Kio Town Centre  18 Females  30 2022   (14,19]
-39  Ang Mo Kio Ang Mo Kio Town Centre  19   Males  30 2022   (14,19]
-40  Ang Mo Kio Ang Mo Kio Town Centre  19 Females  30 2022   (14,19]
-41  Ang Mo Kio Ang Mo Kio Town Centre  20   Males  20 2022   (19,24]
-42  Ang Mo Kio Ang Mo Kio Town Centre  20 Females  30 2022   (19,24]
-43  Ang Mo Kio Ang Mo Kio Town Centre  21   Males  40 2022   (19,24]
-44  Ang Mo Kio Ang Mo Kio Town Centre  21 Females  30 2022   (19,24]
-45  Ang Mo Kio Ang Mo Kio Town Centre  22   Males  30 2022   (19,24]
-46  Ang Mo Kio Ang Mo Kio Town Centre  22 Females  20 2022   (19,24]
-47  Ang Mo Kio Ang Mo Kio Town Centre  23   Males  30 2022   (19,24]
-48  Ang Mo Kio Ang Mo Kio Town Centre  23 Females  30 2022   (19,24]
-49  Ang Mo Kio Ang Mo Kio Town Centre  24   Males  20 2022   (19,24]
-50  Ang Mo Kio Ang Mo Kio Town Centre  24 Females  30 2022   (19,24]
-51  Ang Mo Kio Ang Mo Kio Town Centre  25   Males  30 2022   (24,29]
-52  Ang Mo Kio Ang Mo Kio Town Centre  25 Females  30 2022   (24,29]
-53  Ang Mo Kio Ang Mo Kio Town Centre  26   Males  30 2022   (24,29]
-54  Ang Mo Kio Ang Mo Kio Town Centre  26 Females  30 2022   (24,29]
-55  Ang Mo Kio Ang Mo Kio Town Centre  27   Males  30 2022   (24,29]
-56  Ang Mo Kio Ang Mo Kio Town Centre  27 Females  40 2022   (24,29]
-57  Ang Mo Kio Ang Mo Kio Town Centre  28   Males  20 2022   (24,29]
-58  Ang Mo Kio Ang Mo Kio Town Centre  28 Females  20 2022   (24,29]
-59  Ang Mo Kio Ang Mo Kio Town Centre  29   Males  30 2022   (24,29]
-60  Ang Mo Kio Ang Mo Kio Town Centre  29 Females  20 2022   (24,29]
-61  Ang Mo Kio Ang Mo Kio Town Centre  30   Males  30 2022   (29,34]
-62  Ang Mo Kio Ang Mo Kio Town Centre  30 Females  30 2022   (29,34]
-63  Ang Mo Kio Ang Mo Kio Town Centre  31   Males  20 2022   (29,34]
-64  Ang Mo Kio Ang Mo Kio Town Centre  31 Females  40 2022   (29,34]
-65  Ang Mo Kio Ang Mo Kio Town Centre  32   Males  30 2022   (29,34]
-66  Ang Mo Kio Ang Mo Kio Town Centre  32 Females  30 2022   (29,34]
-67  Ang Mo Kio Ang Mo Kio Town Centre  33   Males  40 2022   (29,34]
-68  Ang Mo Kio Ang Mo Kio Town Centre  33 Females  30 2022   (29,34]
-69  Ang Mo Kio Ang Mo Kio Town Centre  34   Males  30 2022   (29,34]
-70  Ang Mo Kio Ang Mo Kio Town Centre  34 Females  30 2022   (29,34]
-71  Ang Mo Kio Ang Mo Kio Town Centre  35   Males  20 2022   (34,39]
-72  Ang Mo Kio Ang Mo Kio Town Centre  35 Females  40 2022   (34,39]
-73  Ang Mo Kio Ang Mo Kio Town Centre  36   Males  30 2022   (34,39]
-74  Ang Mo Kio Ang Mo Kio Town Centre  36 Females  40 2022   (34,39]
-75  Ang Mo Kio Ang Mo Kio Town Centre  37   Males  30 2022   (34,39]
-76  Ang Mo Kio Ang Mo Kio Town Centre  37 Females  30 2022   (34,39]
-77  Ang Mo Kio Ang Mo Kio Town Centre  38   Males  30 2022   (34,39]
-78  Ang Mo Kio Ang Mo Kio Town Centre  38 Females  40 2022   (34,39]
-79  Ang Mo Kio Ang Mo Kio Town Centre  39   Males  50 2022   (34,39]
-80  Ang Mo Kio Ang Mo Kio Town Centre  39 Females  50 2022   (34,39]
-81  Ang Mo Kio Ang Mo Kio Town Centre  40   Males  40 2022   (39,44]
-82  Ang Mo Kio Ang Mo Kio Town Centre  40 Females  50 2022   (39,44]
-83  Ang Mo Kio Ang Mo Kio Town Centre  41   Males  30 2022   (39,44]
-84  Ang Mo Kio Ang Mo Kio Town Centre  41 Females  40 2022   (39,44]
-85  Ang Mo Kio Ang Mo Kio Town Centre  42   Males  40 2022   (39,44]
-86  Ang Mo Kio Ang Mo Kio Town Centre  42 Females  40 2022   (39,44]
-87  Ang Mo Kio Ang Mo Kio Town Centre  43   Males  40 2022   (39,44]
-88  Ang Mo Kio Ang Mo Kio Town Centre  43 Females  40 2022   (39,44]
-89  Ang Mo Kio Ang Mo Kio Town Centre  44   Males  40 2022   (39,44]
-90  Ang Mo Kio Ang Mo Kio Town Centre  44 Females  50 2022   (39,44]
-91  Ang Mo Kio Ang Mo Kio Town Centre  45   Males  40 2022   (44,49]
-92  Ang Mo Kio Ang Mo Kio Town Centre  45 Females  40 2022   (44,49]
-93  Ang Mo Kio Ang Mo Kio Town Centre  46   Males  40 2022   (44,49]
-94  Ang Mo Kio Ang Mo Kio Town Centre  46 Females  50 2022   (44,49]
-95  Ang Mo Kio Ang Mo Kio Town Centre  47   Males  40 2022   (44,49]
-96  Ang Mo Kio Ang Mo Kio Town Centre  47 Females  50 2022   (44,49]
-97  Ang Mo Kio Ang Mo Kio Town Centre  48   Males  50 2022   (44,49]
-98  Ang Mo Kio Ang Mo Kio Town Centre  48 Females  50 2022   (44,49]
-99  Ang Mo Kio Ang Mo Kio Town Centre  49   Males  30 2022   (44,49]
-100 Ang Mo Kio Ang Mo Kio Town Centre  49 Females  60 2022   (44,49]</code></pre>
+<pre><code>           PA                     SZ Age     Sex Pop Time Age_group
+1  Ang Mo Kio Ang Mo Kio Town Centre   0   Males  10 2022    0 to 4
+2  Ang Mo Kio Ang Mo Kio Town Centre   0 Females  10 2022    0 to 4
+3  Ang Mo Kio Ang Mo Kio Town Centre   1   Males  20 2022    0 to 4
+4  Ang Mo Kio Ang Mo Kio Town Centre   1 Females  10 2022    0 to 4
+5  Ang Mo Kio Ang Mo Kio Town Centre   2   Males  20 2022    0 to 4
+6  Ang Mo Kio Ang Mo Kio Town Centre   2 Females  10 2022    0 to 4
+7  Ang Mo Kio Ang Mo Kio Town Centre   3   Males  20 2022    0 to 4
+8  Ang Mo Kio Ang Mo Kio Town Centre   3 Females  10 2022    0 to 4
+9  Ang Mo Kio Ang Mo Kio Town Centre   4   Males  30 2022    0 to 4
+10 Ang Mo Kio Ang Mo Kio Town Centre   4 Females  30 2022    0 to 4</code></pre>
 </div>
 </div>
+<p>Check the top 9 planing area with the most population:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pop<span class="ot">=</span>popdata <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(PA)  <span class="sc">%&gt;%</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">summarise</span>(<span class="at">Pop =</span> <span class="fu">sum</span>(Pop),</span>
@@ -425,6 +338,7 @@ by coercion</code></pre>
 9 Yishun        223340</code></pre>
 </div>
 </div>
+<p>Filter the planing area:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span><span class="fu">filter</span>(popdata,PA <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Bedok"</span>,<span class="st">"Jurong West"</span>,<span class="st">"Yishun"</span>,<span class="st">"Punggol"</span>,<span class="st">'Bukit Batok'</span>,<span class="st">"Woodlands"</span>,<span class="st">"Sengkang"</span>,<span class="st">"Hougang"</span>,<span class="st">"Choa Chu Kang"</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span> popdata[<span class="sc">!</span><span class="fu">is.na</span>(popdata<span class="sc">$</span>Age_group),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -434,6 +348,21 @@ by coercion</code></pre>
 <h1>3 Age-Sex Pyramid Using Trellis Display Critique and Remake</h1>
 <section id="critique" class="level2">
 <h2 class="anchored" data-anchor-id="critique"><strong>3.1 Critique</strong></h2>
+<p>The graph below is an Age-Sex Pyramid made by a classmate</p>
+<p><img src="2.png" class="img-fluid"></p>
+<p><strong>Clarity</strong></p>
+<ul>
+<li><p>The graph is generally clear in terms of x-axis labels, planning area labels and overall layout. The audience is able to gasp the general trend of population distribution of each planning area.</p></li>
+<li><p>Y-axis label 'AG' is an acronym, which is vague, can be improved by using ‘Age Group’. And the group name was compressed, this will bring problem for the audience.</p></li>
+<li><p>Some value labels are blocked and some groups have labels but others do not.</p></li>
+<li><p>The ‘Column’ and ‘Row’ should be hided.</p></li>
+<li><p>The title of the graph should be bold and bigger</p></li>
+</ul>
+<p><strong>Aesthetics</strong></p>
+<ul>
+<li><p>Colors chosen are clean and easily readable to the audience.</p></li>
+<li><p>The planning area labels could be more clean.</p></li>
+</ul>
 </section>
 <section id="remake" class="level2">
 <h2 class="anchored" data-anchor-id="remake"><strong>3.2 Remake</strong></h2>
@@ -452,15 +381,18 @@ by coercion</code></pre>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> PA) <span class="sc">+</span></span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Age-Sex Pyramid of 9 Planning Area in Singapore"</span>) <span class="sc">+</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">18</span>,<span class="at">face=</span><span class="st">'bold'</span>,<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">18</span>,<span class="at">face=</span><span class="st">'bold'</span>,<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.major =</span><span class="fu">element_blank</span>(), </span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.title =</span>  <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>,<span class="at">face =</span> <span class="st">"bold"</span>),</span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.y =</span>   <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">1</span>, </span>
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">size=</span><span class="dv">10</span>),  </span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">4</span>),<span class="st">'cm'</span>)) </span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"1.png"</span>, <span class="at">units=</span><span class="st">"in"</span>, <span class="at">dpi=</span><span class="dv">300</span>, <span class="at">width=</span><span class="dv">12</span>, <span class="at">height=</span><span class="dv">12</span>, <span class="at">device=</span><span class="st">"png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">plot.margin=</span><span class="fu">unit</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">4</span>),<span class="st">'cm'</span>))<span class="sc">+</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>Pop),</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge2</span>(<span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">padding=</span><span class="fl">0.3</span>,<span class="at">preserve =</span> <span class="st">'single'</span>), </span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="fl">0.6</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>,<span class="at">size=</span><span class="dv">3</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"1.png"</span>, <span class="at">units=</span><span class="st">"in"</span>, <span class="at">dpi=</span><span class="dv">300</span>, <span class="at">width=</span><span class="dv">12</span>, <span class="at">height=</span><span class="dv">12</span>, <span class="at">device=</span><span class="st">"png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

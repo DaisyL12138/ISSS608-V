@@ -26,22 +26,28 @@ popdata <- read_csv("popdata.csv")
 head(popdata,10)
 ```
 
+Change the data type of 'Age' from strings to numeric:
+
 ```{r}
 popdata <- transform(popdata,Age=as.numeric(Age))
 
 
 ```
 
+Group 'Age' in to 'Age_group':
+
 ```{r}
 popdata<-popdata%>%
   mutate(Age_group = cut(Age, breaks = c(0,4,9,14,19,24,29,34,39,44,49,54,59,64,69,74,79,84,89),
   include.lowest = TRUE,
   include.highest=TRUE,
-  #labels = c("0 to 4", "5 to 9", "10 to 14", "15 to 19","20 to 24",,,,,,,),
+  labels = c("0 to 4", "5 to 9", "10 to 14", "15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 to 89")
                          
                          ))
-head(popdata,100)
+head(popdata,10)
 ```
+
+Check the top 9 planing area with the most population:
 
 ```{r}
 pop=popdata %>% group_by(PA)  %>%
@@ -49,6 +55,8 @@ pop=popdata %>% group_by(PA)  %>%
                               .groups = 'drop')
 top_n(pop,9,Pop)
 ```
+
+Filter the planing area:
 
 ```{r}
 popdata <-filter(popdata,PA %in% c("Bedok","Jurong West","Yishun","Punggol",'Bukit Batok',"Woodlands","Sengkang","Hougang","Choa Chu Kang"))
@@ -60,11 +68,34 @@ popdata <- popdata[!is.na(popdata$Age_group),]
 
 ## **3.1 Critique**
 
+The graph below is an Age-Sex Pyramid made by a classmate
+
+![](2.png)
+
+**Clarity**
+
+-   The graph is generally clear in terms of x-axis labels, planning area labels and overall layout. The audience is able to gasp the general trend of population distribution of each planning area.
+
+-   Y-axis label \'AG\' is an acronym, which is vague, can be improved by using 'Age Group'. And the group name was compressed, this will bring problem for the audience.
+
+-   Some value labels are blocked and some groups have labels but others do not.
+
+-   The 'Column' and 'Row' should be hided.
+
+-   The title of the graph should be bold and bigger
+
+**Aesthetics**
+
+-   Colors chosen are clean and easily readable to the audience.
+
+-   The planning area labels could be more clean.
+
 ## **3.2 Remake**
 
 ```{r}
 pop1 <-popdata %>% group_by(PA,Age_group,Sex)  %>%
   summarise(Pop=sum(Pop),.groups='keep')
+
                   
 ```
 
@@ -80,14 +111,17 @@ ggplot(data=pop1,
   coord_flip()+
   facet_wrap(~ PA) +
   ggtitle("Age-Sex Pyramid of 9 Planning Area in Singapore") +
-   theme(plot.title = element_text(size=18,face='bold',hjust = 0.5),
+  theme(plot.title = element_text(size=18,face='bold',hjust = 0.5),
           panel.grid.major =element_blank(), 
           panel.grid.minor = element_blank(),
           panel.background = element_blank(),
           axis.title =  element_text(size=12,face = "bold"),
           axis.text.y =   element_text(hjust = 1, 
                                         size=10),  
-                                        plot.margin=unit(rep(1,4),'cm')) 
+                                        plot.margin=unit(rep(1,4),'cm'))+
+  geom_text(aes(label=Pop),
+            position = position_dodge2(width = 0.5, padding=0.3,preserve = 'single'), 
+            vjust = 0.6, hjust = 0.5,size=3)
 ggsave("1.png", units="in", dpi=300, width=12, height=12, device="png")
 ```
 
