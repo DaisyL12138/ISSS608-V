@@ -28,14 +28,19 @@ head(popdata,10)
 
 ```{r}
 popdata <- transform(popdata,Age=as.numeric(Age))
-head(popdata,10)
+
 
 ```
 
 ```{r}
 popdata<-popdata%>%
-  mutate(Age_group = cut(Age, breaks = c(-Inf,4,9,14,19,24,39,44,49,54,59,64,69,74,79,84,89,Inf)))
-head(popdata,20)
+  mutate(Age_group = cut(Age, breaks = c(0,4,9,14,19,24,29,34,39,44,49,54,59,64,69,74,79,84,89),
+  include.lowest = TRUE,
+  include.highest=TRUE,
+  #labels = c("0 to 4", "5 to 9", "10 to 14", "15 to 19","20 to 24",,,,,,,),
+                         
+                         ))
+head(popdata,100)
 ```
 
 ```{r}
@@ -58,15 +63,32 @@ popdata <- popdata[!is.na(popdata$Age_group),]
 ## **3.2 Remake**
 
 ```{r}
-ggplot(data=popdata, 
+pop1 <-popdata %>% group_by(PA,Age_group,Sex)  %>%
+  summarise(Pop=sum(Pop),.groups='keep')
+                  
+```
+
+```{r}
+#| eval: false
+ggplot(data=pop1, 
        aes(x=Age_group,fill=Sex,
            y = ifelse(test = Sex == "Males",
                             yes = -Pop, no = Pop))) + 
- geom_bar(stat = 'Identity') +
-  scale_y_continuous(labels = abs, limits = max(popdata$Pop) * c(-1,1)) +
-  labs(y = "Population Amount") + 
+ geom_bar(stat = 'Identity',width = 0.8) +
+  scale_y_continuous(labels = abs, n.breaks=7,limits = max(pop1$Pop) * c(-1,1)) +
+  labs(x='Age Group',y = "Population Amount") + 
   coord_flip()+
   facet_wrap(~ PA) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
-
+  ggtitle("Age-Sex Pyramid of 9 Planning Area in Singapore") +
+   theme(plot.title = element_text(size=18,face='bold',hjust = 0.5),
+          panel.grid.major =element_blank(), 
+          panel.grid.minor = element_blank(),
+          panel.background = element_blank(),
+          axis.title =  element_text(size=12,face = "bold"),
+          axis.text.y =   element_text(hjust = 1, 
+                                        size=10),  
+                                        plot.margin=unit(rep(1,4),'cm')) 
+ggsave("1.png", units="in", dpi=300, width=12, height=12, device="png")
 ```
+
+![](1.png){fig-align="center"}
