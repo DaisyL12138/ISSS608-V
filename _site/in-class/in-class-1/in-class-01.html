@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-01-28">
+<meta name="author" content="Daisy">
 
-<title>ISSS608-VAA - Take Home Ex 01</title>
+<title>ISSS608-VAA - In Class 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,33 +142,27 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#the-procedures" id="toc-the-procedures" class="nav-link active" data-scroll-target="#the-procedures">The Procedures</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Take Home Ex 01</h1>
+<h1 class="title">In Class 1</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    
     <div>
-    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 28, 2023</p>
-    </div>
+             <p>Daisy </p>
+          </div>
   </div>
+    
   
     
   </div>
@@ -176,100 +170,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="the-procedures" class="level1">
-<h1>The Procedures</h1>
-<table class="table">
-<thead>
-<tr class="header">
-<th style="text-align: center;">Steps</th>
-<th style="text-align: center;">Screenshot</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><ol type="1">
-<li>Load the popdata.csv file into Tableau Desktop.</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/load-data.png" class="img-fluid"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><ol start="2" type="1">
-<li>In order to create the age-sex pyramid, we need the age group,which is the discrete value, instead of continuous value.So, from the ‘data source’ panel, right click on the ‘PA’ and click on ‘create group’. The criteria to make groups is referred to website <a href="https://www.populationpyramid.net/">PopulationPyramid.Net</a></li>
-</ol></td>
-<td style="text-align: center;"><img src="images/1.png" title="fig:" class="img-fluid" alt="Figure 1- Group the ‘Age’ parameter"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><ol start="3" type="1">
-<li>From ‘Data’ panel, click on the little downside triangle, and click on ‘create parameter’.</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/新变量.png" class="img-fluid"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><ol start="4" type="1">
-<li>Create a new parameter called ‘female’, which is the total population of female.</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/female.png" class="img-fluid"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><ol start="5" type="1">
-<li>Create a new parameter called ‘male’,which is the total population of male.</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/male.png" class="img-fluid"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><ol start="6" type="1">
-<li>Drag ‘female’and ’male’ to Columns, ‘PA’ and ‘Age (group)’ to Rows, drag ‘Sex’to colour.Then right click on the title ’PA’ and click on ‘sort’, choose sort by ‘Field’, in descending order and field name is ‘pop’ which is the total population.</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/3-01.png" class="img-fluid"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><ol start="7" type="1">
-<li>Then, right click on ‘PA’, click ‘Filter’. Choose the top 9 area with the highest population.</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/3.1-01.png" class="img-fluid"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><ol start="8" type="1">
-<li>Right click on ‘Age (group)’, then click ‘Filter’. Check ‘Null’ and check ‘Exclude’.</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/exclude null.png" class="img-fluid"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><ol start="9" type="1">
-<li>Click on ‘Data’ at the top of the window, then choose ‘Extract Data’.</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/extractdata.png" class="img-fluid"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><ol start="10" type="1">
-<li>Click on ‘Extract’</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/exdata.png" class="img-fluid"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><ol start="11" type="1">
-<li>Click on ‘Server’ at the top, choose ‘Tableau Public’,then ‘Save to Tableau Public’.</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/4.png" class="img-fluid"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><ol start="12" type="1">
-<li>If not satisfied, click on ‘Color’ under Marks card, click ‘Edit Colors’, then pick more pretty ones.</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/5.1.png" class="img-fluid"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><ol start="13" type="1">
-<li>Click on white space of the ‘PA’ column, click on ‘Format’, and give a shading to this column.</li>
-<li>Public again.</li>
-</ol></td>
-<td style="text-align: center;"><img src="images/5.2.png" class="img-fluid"></td>
-</tr>
-</tbody>
-</table>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
