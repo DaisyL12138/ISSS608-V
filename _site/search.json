@@ -95,6 +95,6 @@
     "href": "in-class/in-class-1/in-class-01.html",
     "title": "In Class 1",
     "section": "",
-    "text": "Installing and loading the R packages\nTwo packages will be installed and loaded, they are Tidyverse and ggiraph\n\npacman::p_load(tidyverse,ggiraph)\n\n\nexamdata <- read_csv(\"Exam_data.csv\")\n\n\np <- ggplot(data=examdata, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(\n    aes(tooltip = ID),\n    stackgroups = TRUE, \n    binwidth = 1, \n    method = \"histodot\") +\n  scale_y_continuous(NULL, \n                     breaks = NULL)\ngirafe(\n  ggobj = p,\n  width_svg = 6,\n  height_svg = 6*0.618\n)"
+    "text": "Installing and loading the R packages\nTwo packages will be installed and loaded, they are Tidyverse and ggiraph\n\npacman::p_load(tidyverse,ggiraph)\n\n\nexamdata <- read_csv(\"Exam_data.csv\")\n\n\np <- ggplot(data=examdata, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(\n    aes(tooltip = ID),\n    stackgroups = TRUE, \n    binwidth = 1, \n    method = \"histodot\") +\n  scale_y_continuous(NULL, \n                     breaks = NULL)\ngirafe(\n  ggobj = p,\n  width_svg = 6,\n  height_svg = 6*0.618\n)\n\n\n\n\n\n\nd <- examdata   \nd_bg <- d[, -3]  \n\nggplot(d, aes(x = ENGLISH, fill = GENDER)) +\n  geom_histogram(data = d_bg, fill = \"grey\", alpha = .5) +\n  geom_histogram(colour = \"black\") +\n  facet_wrap(~ GENDER) +\n  guides(fill = FALSE) +  \n  theme_bw()"
   }
 ]

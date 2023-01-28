@@ -38,3 +38,16 @@ girafe(
   height_svg = 6*0.618
 )
 ```
+
+```{r}
+d <- examdata   
+d_bg <- d[, -3]  
+
+ggplot(d, aes(x = ENGLISH, fill = GENDER)) +
+  geom_histogram(data = d_bg, fill = "grey", alpha = .5) +
+  geom_histogram(colour = "black") +
+  facet_wrap(~ GENDER) +
+  guides(fill = FALSE) +  
+  theme_bw()
+
+```
