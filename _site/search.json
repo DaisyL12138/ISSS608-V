@@ -89,5 +89,12 @@
     "title": "take-home-2",
     "section": "3.2 Remake",
     "text": "3.2 Remake\n\npop1 <-popdata %>% group_by(PA,Age_group,Sex)  %>%\n  summarise(Pop=sum(Pop),.groups='keep')\n\n\nggplot(data=pop1, \n       aes(x=Age_group,fill=Sex,\n           y = ifelse(test = Sex == \"Males\",\n                            yes = -Pop, no = Pop))) + \n geom_bar(stat = 'Identity',width = 0.8) +\n  scale_y_continuous(labels = abs, n.breaks=7,limits = max(pop1$Pop) * c(-1,1)) +\n  labs(x='Age Group',y = \"Population Amount\") + \n  coord_flip()+\n  facet_wrap(~ PA) +\n  ggtitle(\"Age-Sex Pyramid of 9 Planning Area in Singapore\") +\n  theme(plot.title = element_text(size=18,face='bold',hjust = 0.5),\n          panel.grid.major =element_blank(), \n          panel.grid.minor = element_blank(),\n          panel.background = element_blank(),\n          axis.title =  element_text(size=12,face = \"bold\"),\n          axis.text.y =   element_text(hjust = 1, \n                                        size=10),  \n                                        plot.margin=unit(rep(1,4),'cm'))+\n  geom_text(aes(label=Pop),\n            position = position_dodge2(width = 0.5, padding=0.3,preserve = 'single'), \n            vjust = 0.6, hjust = 0.5,size=3)\nggsave(\"1.png\", units=\"in\", dpi=300, width=12, height=12, device=\"png\")"
+  },
+  {
+    "objectID": "in-class/in-class-1/in-class-01.html",
+    "href": "in-class/in-class-1/in-class-01.html",
+    "title": "In Class 1",
+    "section": "",
+    "text": "pacman::p_load(tidyverse)\n\n\nexamdata <- read_csv(\"Exam_data.csv\")"
   }
 ]

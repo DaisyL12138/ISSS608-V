@@ -1,5 +1,19 @@
 ---
 title: "In Class 1"
 author: "Daisy"
+date: "`r Sys.Date()`"
 editor: visual
+execute: 
+  echo: true   #show out the code chunk
+  eval: true
+  warning: false
+format: html
 ---
+
+```{r}
+pacman::p_load(tidyverse)
+```
+
+```{r}
+examdata <- read_csv("Exam_data.csv")
+```
