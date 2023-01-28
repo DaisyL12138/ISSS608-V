@@ -2,6 +2,10 @@
 title: "Hands-Ex01"
 author: "Daisy"
 date: "`r Sys.Date()`"
+execute: 
+  echo: true   #show out the code chunk
+  eval: true
+  warning: false
 editor: visual
 ---
 

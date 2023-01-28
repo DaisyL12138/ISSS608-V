@@ -10,10 +10,31 @@ execute:
 format: html
 ---
 
+Installing and loading the R packages
+
+Two packages will be installed and loaded, they are `Tidyverse` and `ggiraph`
+
 ```{r}
-pacman::p_load(tidyverse)
+pacman::p_load(tidyverse,ggiraph)
 ```
 
 ```{r}
 examdata <- read_csv("Exam_data.csv")
+```
+
+```{r}
+p <- ggplot(data=examdata, 
+       aes(x = MATHS)) +
+  geom_dotplot_interactive(
+    aes(tooltip = ID),
+    stackgroups = TRUE, 
+    binwidth = 1, 
+    method = "histodot") +
+  scale_y_continuous(NULL, 
+                     breaks = NULL)
+girafe(
+  ggobj = p,
+  width_svg = 6,
+  height_svg = 6*0.618
+)
 ```
