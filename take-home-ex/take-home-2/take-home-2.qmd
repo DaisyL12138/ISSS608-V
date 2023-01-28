@@ -3,6 +3,10 @@ title: "take-home-2"
 author: "Daisy"
 date: "`r Sys.Date()`"
 editor: visual
+execute: 
+  echo: true   #show out the code chunk
+  eval: true
+  warning: false
 ---
 
 # 1 Overview
