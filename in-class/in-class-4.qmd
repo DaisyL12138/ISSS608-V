@@ -52,7 +52,7 @@ p <- ggplot(data=exam_data,
   geom_point(dotsize = 1) +
   coord_cartesian(xlim=c(0,100),
                   ylim=c(0,100))
-ggplotly(p) #<<
+ggplotly(p) 
 ```
 
 ```{r}
