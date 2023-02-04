@@ -14,11 +14,18 @@
     "text": "pacman::p_load(tidyverse)\n\n\n\n\n#| eval: false\nexam_data <- read_csv(\"data/Exam_data.csv\")\n\n\n\n\n\nggplot(data=exam_data,\n       aes(x=RACE))+\n  geom_bar()\n\n\nhist(exam_data$MATHS)\n\n\n\n\n\nggplot(data=exam_data, aes(x = MATHS)) +\n  geom_histogram(bins=15, \n                 boundary = 1,\n                 color=\"white\", \n                 fill=\"pink\") +\n  ggtitle(\"Distribution of Maths scores\")"
   },
   {
-    "objectID": "in-class/in-class-1/in-class-01.html",
-    "href": "in-class/in-class-1/in-class-01.html",
+    "objectID": "in-class/in-class-01.html",
+    "href": "in-class/in-class-01.html",
     "title": "In Class 1",
     "section": "",
     "text": "Installing and loading the R packages\nTwo packages will be installed and loaded, they are Tidyverse and ggiraph\n\npacman::p_load(tidyverse,ggiraph)\n\n\nexamdata <- read_csv(\"Exam_data.csv\")\n\n\np <- ggplot(data=examdata, \n       aes(x = MATHS)) +\n  geom_dotplot_interactive(\n    aes(tooltip = ID),\n    stackgroups = TRUE, \n    binwidth = 1, \n    method = \"histodot\") +\n  scale_y_continuous(NULL, \n                     breaks = NULL)\ngirafe(\n  ggobj = p,\n  width_svg = 6,\n  height_svg = 6*0.618\n)\n\n\n\n\n\n\nd <- examdata   \nd_bg <- d[, -3]  \n\nggplot(d, aes(x = ENGLISH, fill = GENDER)) +\n  geom_histogram(data = d_bg, fill = \"grey\", alpha = .5) +\n  geom_histogram(colour = \"black\") +\n  facet_wrap(~ GENDER) +\n  guides(fill = FALSE) +  \n  theme_bw()"
+  },
+  {
+    "objectID": "in-class/in-class-4/in-class-4.html",
+    "href": "in-class/in-class-4/in-class-4.html",
+    "title": "In Class Ex-4",
+    "section": "",
+    "text": "pacman::p_load(plotly,patchwork,tidyverse)"
   },
   {
     "objectID": "index.html",
@@ -96,5 +103,12 @@
     "title": "take-home-2",
     "section": "3.2 Remake",
     "text": "3.2 Remake\n\npop1 <-popdata %>% group_by(PA,Age_group,Sex)  %>%\n  summarise(Pop=sum(Pop),.groups='keep')\n\n\nggplot(data=pop1, \n       aes(x=Age_group,fill=Sex,\n           y = ifelse(test = Sex == \"Males\",\n                            yes = -Pop, no = Pop))) + \n geom_bar(stat = 'Identity',width = 0.8) +\n  scale_y_continuous(labels = abs, n.breaks=7,limits = max(pop1$Pop) * c(-1,1)) +\n  labs(x='Age Group',y = \"Population Amount\") + \n  coord_flip()+\n  facet_wrap(~ PA) +\n  ggtitle(\"Age-Sex Pyramid of 9 Planning Area in Singapore\") +\n  theme(plot.title = element_text(size=18,face='bold',hjust = 0.5),\n          panel.grid.major =element_blank(), \n          panel.grid.minor = element_blank(),\n          panel.background = element_blank(),\n          axis.title =  element_text(size=12,face = \"bold\"),\n          axis.text.y =   element_text(hjust = 1, \n                                        size=10),  \n                                        plot.margin=unit(rep(1,4),'cm'))+\n  geom_text(aes(label=Pop),\n            position = position_dodge2(width = 0.5, padding=0.3,preserve = 'single'), \n            vjust = 0.6, hjust = 0.5,size=3)\nggsave(\"1.png\", units=\"in\", dpi=300, width=12, height=12, device=\"png\")"
+  },
+  {
+    "objectID": "in-class/in-class-4.html",
+    "href": "in-class/in-class-4.html",
+    "title": "In Class Ex-4",
+    "section": "",
+    "text": "pacman::p_load(plotly,tidyverse,patchwork)\n\n\nexam<- read_csv(\"Exam_data.csv\")"
   }
 ]

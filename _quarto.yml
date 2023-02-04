@@ -20,9 +20,9 @@ website:
     - text: "In Class Exercise"
       menu:
         - text: "In-Class 3"
-          href: "in-class/in-class-1/in-class-01.qmd"
+          href: "in-class/in-class-01.qmd"
         - text: "In-Class 4"
-          href: "in-class/in-class-4/in-class-4.qmd"
+          href: "in-class/in-class-4.qmd"
      
     right:
       - href: index.qmd

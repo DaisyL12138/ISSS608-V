@@ -10,7 +10,7 @@ execute:
 ---
 
 ```{r}
-pacman::p_load(plotly,patchwork,tidyverse)
+pacman::p_load(plotly,tidyverse,patchwork)
 ```
 
 ```{r}
