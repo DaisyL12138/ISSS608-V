@@ -10,7 +10,7 @@ execute:
 ---
 
 ```{r}
-pacman::p_load(plotly,tidyverse,patchwork,ggiraph)
+pacman::p_load(plotly,tidyverse,patchwork,ggiraph,ggstatsplot)
 ```
 
 ```{r}
@@ -95,4 +95,28 @@ girafe(
   ggobj = p,                             
   width_svg = 6,                         
   height_svg = 6*0.618)                                        
+```
+
+```{r}
+set.seed(1234)
+
+gghistostats(
+  data = exam,
+  x = ENGLISH,
+  type = "bayes",
+  test.value = 60,
+  xlab = "English scores"
+)
+```
+
+```{r}
+ggbetweenstats(
+  data = exam,
+  x = GENDER, 
+  y = MATHS,
+  type = "np",
+  messages = FALSE
+)
+
+
 ```
