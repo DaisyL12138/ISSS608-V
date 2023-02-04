@@ -109,6 +109,6 @@
     "href": "in-class/in-class-4.html",
     "title": "In Class Ex-4",
     "section": "",
-    "text": "pacman::p_load(plotly,tidyverse,patchwork)\n\n\nexam<- read_csv(\"Exam_data.csv\")"
+    "text": "pacman::p_load(plotly,tidyverse,patchwork)\n\n\nexam<- read_csv(\"Exam_data.csv\")\n\n\nplot_ly(data = exam, \n        x = ~ENGLISH, \n        y = ~MATHS, \n        color = ~RACE, \n        colors = \"Set1\")"
   }
 ]

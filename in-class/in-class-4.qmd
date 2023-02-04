@@ -16,3 +16,11 @@ pacman::p_load(plotly,tidyverse,patchwork)
 ```{r}
 exam<- read_csv("Exam_data.csv")
 ```
+
+```{r}
+plot_ly(data = exam, 
+        x = ~ENGLISH, 
+        y = ~MATHS, 
+        color = ~RACE, 
+        colors = "Set1") 
+```
