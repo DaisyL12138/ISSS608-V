@@ -132,6 +132,10 @@ model <- lm(Price ~ Age_08_04 + Mfg_Year + KM +
               Weight + Guarantee_Period, data = car_resale)
 
 summary(model)
+
+```
+```{r}
+
 ```
 
 ```{r}
