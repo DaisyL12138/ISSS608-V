@@ -36,7 +36,7 @@ plot_ly(data = exam,
 ```
 
 ```{r}
-plot_ly(data = exam_data, 
+plot_ly(data = exam, 
         x = ~ENGLISH, 
         y = ~MATHS,
         text = ~paste("Student ID:", ID,     #<<
@@ -46,7 +46,7 @@ plot_ly(data = exam_data,
 ```
 
 ```{r}
-p <- ggplot(data=exam_data, 
+p <- ggplot(data=exam, 
             aes(x = MATHS,
                 y = ENGLISH)) +
   geom_point(dotsize = 1) +
