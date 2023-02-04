@@ -19,8 +19,10 @@ website:
           href: "take-home-ex/take-home-2/take-home-2.qmd"
     - text: "In Class Exercise"
       menu:
-        - text: "In-Class 1"
+        - text: "In-Class 3"
           href: "in-class/in-class-1/in-class-01.qmd"
+        - text: "In-Class 4"
+          href: "in-class/in-class-4/in-class-4.qmd"
      
     right:
       - href: index.qmd

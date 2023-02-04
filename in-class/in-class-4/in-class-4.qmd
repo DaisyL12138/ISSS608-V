@@ -1,0 +1,10 @@
+---
+title: "In Class Ex-4"
+author: "Daisy"
+editor: visual
+date: "`r Sys.Date()`"
+execute: 
+  echo: true  
+  eval: true
+  warning: false
+---
