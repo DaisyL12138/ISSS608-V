@@ -10,7 +10,7 @@ execute:
 ---
 
 ```{r}
-pacman::p_load(plotly,tidyverse,patchwork,ggiraph,ggstatsplot)
+pacman::p_load(DT,plotly,tidyverse,patchwork,ggiraph,ggstatsplot,readxl, performance, parameters, see)
 ```
 
 ```{r}
@@ -119,4 +119,20 @@ ggbetweenstats(
 )
 
 
+```
+
+```{r}
+car_resale <- read_xls("ToyotaCorolla.xls", 
+                       "data")
+car_resale
+```
+
+```{r}
+model <- lm(Price ~ Age_08_04 + Mfg_Year + KM + 
+              Weight + Guarantee_Period, data = car_resale)
+model
+```
+
+```{r}
+check_collinearity(model)
 ```
