@@ -134,6 +134,7 @@ model <- lm(Price ~ Age_08_04 + Mfg_Year + KM +
 summary(model)
 
 ```
+
 ```{r}
 
 ```

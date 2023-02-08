@@ -1,0 +1,24 @@
+---
+title: "Take Home Ex 3"
+author: "Daisy"
+date: "`r Sys.Date()`"
+execute: 
+  echo: true   #show out the code chunk
+  eval: true
+  warning: false
+editor: visual
+---
+
+# **Overview**
+
+# **Getting Started**
+
+## **Installing and loading packages**
+
+```{r}
+pacman::p_load(DT,plotly,tidyverse,patchwork,ggiraph,ggstatsplot, performance)
+```
+
+```{r}
+data<- read_csv("resale-flat-prices-based-on-registration-date-from-jan-2017-onwards.csv")
+```
