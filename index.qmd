@@ -1,5 +1,11 @@
 ---
 title: "ISSS608-VAA"
+author: "Daisy"
+date: "`r Sys.Date()`"
+execute: 
+  echo: true   #show out the code chunk
+  eval: true
+  warning: false
 ---
 
 Welcome to **ISSS608** Homepage!
