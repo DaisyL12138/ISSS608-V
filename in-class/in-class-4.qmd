@@ -7,6 +7,9 @@ execute:
   echo: true  
   eval: true
   warning: false
+format:
+  html:
+    smooth-scroll: true
 ---
 
 ```{r}
