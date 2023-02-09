@@ -27,7 +27,10 @@ data<- read_csv("resale-flat-prices-based-on-registration-date-from-jan-2017-onw
 
 ```{r}
 head(data)
+
 ```
+
+below is a screenshot of the official website to give a clear view of the column meaning.
 
 ![](column.png)
 
@@ -42,15 +45,15 @@ data <-filter(data,flat_type %in% c("3 ROOM","4 ROOM","5 ROOM"))
 ```
 
 ```{r}
-data1<- group_by(data,flat_type,month) 
-data1<- summarise(data1,rp = mean(resale_price),
+data1=data %>% group_by(flat_type,month) %>%
+         summarise(mean_resale_price_per_month = mean(resale_price),
                               .groups = 'drop')
 ```
 
 ```{r}
 p<- plot_ly(data = data1,
         x = ~month, 
-        y = ~rp,
+        y = ~mean_resale_price_per_month,
         color = ~flat_type , 
         colors = "Set1") 
 add_trace(p, type = "scatter",
