@@ -32,6 +32,7 @@ website:
       - about.qmd
 format:
   html:
+    smooth-scroll: true
     theme: minty
     css: styles.css
     toc: true
