@@ -34,8 +34,8 @@ pairs(wine[,2:12])
 ```
 
 ```{r}
-#| fig-width: 50
-#| fig-height: 50
+#| fig-width: 10
+#| fig-height: 10
 ggstatsplot::ggcorrmat(
   data = wine, 
   cor.vars = 1:11)
