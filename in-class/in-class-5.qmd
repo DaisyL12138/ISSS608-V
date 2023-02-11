@@ -10,7 +10,7 @@ execute:
 ---
 
 ```{r}
-pacman::p_load(ggtern,plotly,tidyverse,ggiraph,ggstatsplot,corrplot,ellipse,corrgram,ggpubr,patchwork,seriation, dendextend, heatmaply)
+pacman::p_load(plotly,tidyverse,ggiraph,ggstatsplot,corrplot,ellipse,corrgram,ggpubr,patchwork,seriation, dendextend, heatmaply)
 ```
 
 ```{r}
@@ -34,18 +34,19 @@ pairs(wine[,2:12])
 ```
 
 ```{r}
-
-"ggstatsplot::ggcorrmat(
+#| fig-width: 7
+#| fig-height: 7
+ggstatsplot::ggcorrmat(
   data = wine, 
-  cor.vars = 1:11)"
+  cor.vars = 1:11)
 
-'Error in titleGrob(label, x, y, hjust = hj, vjust = vj, angle = angle, : 
-unused argument (expand_y = TRUE)'
+
 ```
 
 ```{r}
-
-'ggstatsplot::ggcorrmat(
+#| fig-width: 7
+#| fig-height: 7
+ggstatsplot::ggcorrmat(
   data = wine, 
   cor.vars = 1:11,
   ggcorrplot.args = list(outline.color = "black", 
@@ -53,10 +54,9 @@ unused argument (expand_y = TRUE)'
                          tl.cex = 10),
   title    = "Correlogram for wine dataset",
   subtitle = "Four pairs are no significant at p < 0.05"
-)'
+)
 
-'Error in titleGrob(label, x, y, hjust = hj, vjust = vj, angle = angle, : 
-unused argument (expand_y = TRUE)'
+
 ```
 
 ```{r}
@@ -182,15 +182,15 @@ agpop_mutated <- pop_data %>%
 ```
 
 ```{r}
-ggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +
-  geom_point()
+#ggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +
+  #geom_point()
 ```
 
 ```{r}
-ggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +
-  geom_point() +
-  labs(title="Population structure, 2015") +
-  theme_rgbw()
+#ggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +
+  #geom_point() +
+  #labs(title="Population structure, 2015") +
+  #theme_rgbw()
 ```
 
 ```{r}
@@ -260,13 +260,13 @@ wh_heatmap <- heatmap(wh_matrix)
 
 ```{r}
 #| fig-width: 15
-#| fig-height: 12
+#| fig-height: 17
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]))
 ```
 
 ```{r}
 #| fig-width: 15
-#| fig-height: 12
+#| fig-height: 17
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
           dist_method = "euclidean",
           hclust_method = "ward.D")
