@@ -1,0 +1,27 @@
+---
+title: "In-class-5"
+author: "Daisy"
+editor: visual
+date: "`r Sys.Date()`"
+execute: 
+  echo: true  
+  eval: true
+  warning: false
+---
+
+```{r}
+pacman::p_load(DT,plotly,tidyverse,patchwork,ggiraph,ggstatsplot,readxl, performance, parameters, see,ggtern,corrplot)
+```
+
+```{r}
+wine <- read_csv("wine_quality.csv")
+
+```
+
+```{r}
+pairs(wine[,1:11])
+```
+
+```{r}
+pairs(wine[,2:12])
+```

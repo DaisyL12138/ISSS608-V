@@ -25,6 +25,8 @@ website:
           href: "in-class/in-class-01.qmd"
         - text: "In-Class 4"
           href: "in-class/in-class-4.qmd"
+        - text: "In-Class 5"
+          href: "in-class/in-class-5.qmd"
      
     right:
       - href: index.qmd

@@ -110,5 +110,12 @@
     "title": "Take Home Ex 3",
     "section": "Installing and loading packages",
     "text": "Installing and loading packages\n\npacman::p_load(DT,plotly,tidyverse,patchwork,ggiraph,ggstatsplot, performance)"
+  },
+  {
+    "objectID": "in-class/in-class-5.html",
+    "href": "in-class/in-class-5.html",
+    "title": "In-class-5",
+    "section": "",
+    "text": "pacman::p_load(DT,plotly,tidyverse,patchwork,ggiraph,ggstatsplot,readxl, performance, parameters, see,ggtern,corrplot)\n\n\nwine <- read_csv(\"wine_quality.csv\")\n\n\npairs(wine[,1:11])\n\n\n\n\n\npairs(wine[,2:12])"
   }
 ]
