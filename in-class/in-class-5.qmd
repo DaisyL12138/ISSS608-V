@@ -14,7 +14,7 @@ pacman::p_load(ggtern,plotly,tidyverse,ggiraph,ggstatsplot,corrplot,ellipse,corr
 ```
 
 ```{r}
-library(ggstatsplot)
+# install.packages('ggstatsplot')
 ```
 
 ```{r}
@@ -34,17 +34,18 @@ pairs(wine[,2:12])
 ```
 
 ```{r}
-#| fig-width: 10
-#| fig-height: 10
-ggstatsplot::ggcorrmat(
+
+"ggstatsplot::ggcorrmat(
   data = wine, 
-  cor.vars = 1:11)
+  cor.vars = 1:11)"
+
+'Error in titleGrob(label, x, y, hjust = hj, vjust = vj, angle = angle, : 
+unused argument (expand_y = TRUE)'
 ```
 
 ```{r}
-#| fig-width: 10
-#| fig-height: 10
-ggstatsplot::ggcorrmat(
+
+'ggstatsplot::ggcorrmat(
   data = wine, 
   cor.vars = 1:11,
   ggcorrplot.args = list(outline.color = "black", 
@@ -52,7 +53,10 @@ ggstatsplot::ggcorrmat(
                          tl.cex = 10),
   title    = "Correlogram for wine dataset",
   subtitle = "Four pairs are no significant at p < 0.05"
-)
+)'
+
+'Error in titleGrob(label, x, y, hjust = hj, vjust = vj, angle = angle, : 
+unused argument (expand_y = TRUE)'
 ```
 
 ```{r}
