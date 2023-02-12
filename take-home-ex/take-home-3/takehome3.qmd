@@ -50,6 +50,23 @@ data <-filter(data,flat_type %in% c("3 ROOM","4 ROOM","5 ROOM")) %>%
 ```
 
 ```{r}
+#| fig-width: 8
+#| fig-height: 8
+gghistostats(
+  data = data,
+  x = 'resale_price(KSGD)',
+  binwidth = 25,
+  type="robust",
+  test.value = 500,
+  xlab = "Resale Price",
+  title="The distribution of Resale price (2022,3/4/5 Room-unit)",
+  centrality.line.args = list(color = "#D55E30", linetype = "dashed"),
+  )+
+  ggthemes::theme_fivethirtyeight()
+
+```
+
+```{r}
 data1=data %>% group_by(flat_type,month) %>%
          summarise(mean_resale_price_per_month = mean(resale_price),
                               .groups = 'drop')
@@ -60,21 +77,33 @@ p<- plot_ly(data = data1,
         x = ~month, 
         y = ~mean_resale_price_per_month,
         color = ~flat_type , 
-        colors = "Set1") 
+        colors = "Set1",
+        title='Line graph of the resale price trend in 2022 ') 
 add_trace(p, type = "scatter",
           mode = "markers+lines")
 ```
 
 ```{r}
-gghistostats(
-  data = data,
-  x = 'resale_price(KSGD)',
-  binwidth = 25,
-  type="robust",
-  test.value = 500,
-  xlab = "Resale Price",
-  title="The distribution of Resale price (2022,3/4/5 Room-unit)")+
-  ggthemes::theme_fivethirtyeight()
+
+```
+
+```{r}
+#| fig-width: 10
+#| fig-height: 11
+ggbetweenstats(
+  data=data,
+  x='flat_type',
+  y='resale_price(KSGD)',
+  plot.type = "boxviolin",
+  outlier.tagging = TRUE, ## whether outliers should be flagged
+  outlier.coef = 1.5, ## coefficient for Tukey's rule
+  outlier.label = 'town',
+  outlier.label.args = list(color = "red",size=2),
+  package = "ggsci",
+  palette = "nrc_npg",
+  title = "violin boxplot of the resale price in 2022 (3/4/5 room unit)",
+  
+  )
 ```
 
 ```{r}

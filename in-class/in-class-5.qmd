@@ -13,9 +13,6 @@ execute:
 pacman::p_load(plotly,tidyverse,ggiraph,ggstatsplot,corrplot,ellipse,corrgram,ggpubr,patchwork,seriation, dendextend, heatmaply)
 ```
 
-
-
-
 ```{r}
 wine <- read_csv("wine_quality.csv")
 
