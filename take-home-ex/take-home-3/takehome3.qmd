@@ -107,5 +107,29 @@ ggbetweenstats(
 ```
 
 ```{r}
+#| fig-width: 12
+#| fig-height: 13
+ggscatterstats(
+  data = data, 
+  x = 'floor_area_sqm', 
+  y = 'resale_price(KSGD)',
+  xlab = " Floor area per unit (sqm)", 
+  ylab = "Resale Price (KSGD)", 
+  label.var = 'town', 
+  label.expression = x < 100 & y > 1000,
+  point.label.args = list(alpha = 0.7, size = 3, color = "grey50"),
+  xfill = "#EBD3E8", 
+  yfill = "#C4E1E1", 
+  title = "Relationship between floor area and resale price",
 
+)
+```
+
+```{r}
+plot_ly(data = data, 
+  x = ~floor_area_sqm, 
+  y = ~resale_price,
+  text = ~paste( "<br>Town:", town),  
+  color = ~flat_type,
+  colors = "Set2")
 ```
