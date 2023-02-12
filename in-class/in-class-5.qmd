@@ -13,9 +13,8 @@ execute:
 pacman::p_load(plotly,tidyverse,ggiraph,ggstatsplot,corrplot,ellipse,corrgram,ggpubr,patchwork,seriation, dendextend, heatmaply)
 ```
 
-```{r}
-# install.packages('ggstatsplot')
-```
+
+
 
 ```{r}
 wine <- read_csv("wine_quality.csv")
@@ -182,15 +181,15 @@ agpop_mutated <- pop_data %>%
 ```
 
 ```{r}
-#ggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +
-  #geom_point()
+ggtern::ggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +
+  geom_point()
 ```
 
 ```{r}
-#ggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +
-  #geom_point() +
-  #labs(title="Population structure, 2015") +
-  #theme_rgbw()
+ggtern::ggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +
+  geom_point() +
+  labs(title="Population structure, 2015") 
+  ggtern::theme_rgbw()
 ```
 
 ```{r}
@@ -260,13 +259,13 @@ wh_heatmap <- heatmap(wh_matrix)
 
 ```{r}
 #| fig-width: 15
-#| fig-height: 17
+#| fig-height: 27
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]))
 ```
 
 ```{r}
 #| fig-width: 15
-#| fig-height: 17
+#| fig-height: 27
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
           dist_method = "euclidean",
           hclust_method = "ward.D")

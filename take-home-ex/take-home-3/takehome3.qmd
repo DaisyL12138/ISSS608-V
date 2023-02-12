@@ -45,7 +45,8 @@ data <-filter(data,month %in% c("2022-01","2022-02","2022-03","2022-04","2022-05
 ```
 
 ```{r}
-data <-filter(data,flat_type %in% c("3 ROOM","4 ROOM","5 ROOM"))
+data <-filter(data,flat_type %in% c("3 ROOM","4 ROOM","5 ROOM")) %>%
+  mutate("resale_price(KSGD)"=resale_price/1000)
 ```
 
 ```{r}
@@ -62,4 +63,20 @@ p<- plot_ly(data = data1,
         colors = "Set1") 
 add_trace(p, type = "scatter",
           mode = "markers+lines")
+```
+
+```{r}
+gghistostats(
+  data = data,
+  x = 'resale_price(KSGD)',
+  binwidth = 25,
+  type="robust",
+  test.value = 500,
+  xlab = "Resale Price",
+  title="The distribution of Resale price (2022,3/4/5 Room-unit)")+
+  ggthemes::theme_fivethirtyeight()
+```
+
+```{r}
+
 ```
