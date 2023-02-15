@@ -11,15 +11,15 @@ editor: visual
 
 # **Overview**
 
-# **Getting Started**
+# **1 Getting Started**
 
-## **Installing and loading packages**
+Installing and loading packages
 
 ```{r}
 pacman::p_load(DT,plotly,tidyverse,patchwork,ggiraph,ggstatsplot, performance)
 ```
 
-# The Dataset
+# **2 The Dataset**
 
 The code chunk below imports the dataset into R by using [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) of [**readr**](https://readr.tidyverse.org/index.html) and save it as an tibble data frame called *data*
 
@@ -36,6 +36,8 @@ Below is a screenshot of the official website to give a clear view of the column
 
 ![](column.png){fig-align="center" width="476"}
 
+# **3 Data Cleaning**
+
 Since we only need the data in 2022 and the record of 3/4/5 room units, we need to filter the data.
 
 ```{r}
@@ -48,6 +50,16 @@ data <-filter(data,month %in% c("2022-01","2022-02","2022-03","2022-04","2022-05
 data <-filter(data,flat_type %in% c("3 ROOM","4 ROOM","5 ROOM")) %>%
   mutate("resale_price(KSGD)"=resale_price/1000)
 ```
+
+# **4 Visualization**
+
+## 4.1 The Distribution of Resale Price
+
+```{r}
+ks.test(data$'resale_price(KSGD)',"pnorm")
+```
+
+A p-value less than the significance level (0.05) indicates that the null hypothesis (that the sample data comes from a normal distribution) should be rejected.
 
 ```{r}
 #| fig-width: 8
@@ -66,6 +78,10 @@ gghistostats(
 
 ```
 
+The skewness of the data distribution is high, with 95% confidence that the trimmed mean is 516.01 KSGD.
+
+## 4.2 Line Graph of the Resale Price Trend in 2022
+
 ```{r}
 data1=data %>% group_by(flat_type,month) %>%
          summarise(mean_resale_price_per_month = mean(resale_price),
@@ -83,9 +99,9 @@ add_trace(p, type = "scatter",
           mode = "markers+lines")
 ```
 
-```{r}
+In this graph, users can observe the resale price trend of 3 room, 4 room, 5 room unit seperatly in 2022.Each plot means the average price of that kind of unit for the single month, by hovering the mouse, user can view the specific data. Overall all three room types are increasing in price, but the three bedrooms are increasing in price to a lesser extent than the other two.
 
-```
+## 4.3 Violin Boxplot of the Resale Price in 2022
 
 ```{r}
 #| fig-width: 10
@@ -101,10 +117,16 @@ ggbetweenstats(
   outlier.label.args = list(color = "red",size=2),
   package = "ggsci",
   palette = "nrc_npg",
+  xlab = "Flat Type",
+  ylab='Resale Price (KSGD)',
   title = "violin boxplot of the resale price in 2022 (3/4/5 room unit)",
   
   )
 ```
+
+This chart shows the distribution of prices for each of the three room types, with a greater concentration of prices for the 3 room style. The other two have a more skewed distribution and the 4 room style has the highest number and more outlier. The outliers in the graph are marked with a town label.
+
+## 4.4 Relationship between Floor Area and Resale Price
 
 ```{r}
 #| fig-width: 12
@@ -132,4 +154,19 @@ plot_ly(data = data,
   text = ~paste( "<br>Town:", town),  
   color = ~flat_type,
   colors = "Set2")
+```
+
+The two diagrams above show the relationship between floor area and resale price, with the different colours indicating the different flat types. And by hovering the mouse, user can know which town an exact unit is in.
+
+```{r}
+#| fig-width: 13
+#| fig-height: 10
+plot_ly(data = data, 
+  x = ~flat_model, 
+  y = ~resale_price,
+  color = ~flat_type,
+  colors = "Set2")
+```
+
+```{}
 ```
