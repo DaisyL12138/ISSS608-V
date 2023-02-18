@@ -140,6 +140,8 @@ ggsave("1.png", units="in", dpi=300, width=12, height=12, device="png")
 
 ## 2
 
+![](images/paste-E9659415.png)
+
 ```{r}
 
 ```
