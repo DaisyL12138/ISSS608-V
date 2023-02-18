@@ -130,3 +130,17 @@ ggsave("1.png", units="in", dpi=300, width=12, height=12, device="png")
 ```
 
 ![](1.png){fig-align="center"}
+
+::: panel-tabset
+## 1
+
+```{r}
+
+```
+
+## 2
+
+```{r}
+
+```
+:::
