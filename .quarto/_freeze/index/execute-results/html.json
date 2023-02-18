@@ -1,7 +1,7 @@
 {
   "hash": "2ae9a28ab51bc95e05654ec0a00e0caa",
   "result": {
-    "markdown": "---\ntitle: \"ISSS608-VAA\"\nauthor: \"Daisy\"\ndate: \"2023-02-11\"\nexecute: \n  echo: true   #show out the code chunk\n  eval: true\n  warning: false\n---\n\n\nWelcome to **ISSS608** Homepage!\n\nIn this website,you will find my coursework prepared for this course.\n\n![](images/dog.png){fig-align=\"center\" width=\"323\"}\n",
+    "markdown": "---\ntitle: \"ISSS608-VAA\"\nauthor: \"Daisy\"\ndate: \"2023-02-18\"\nexecute: \n  echo: true   #show out the code chunk\n  eval: true\n  warning: false\n---\n\n\nWelcome to **ISSS608** Homepage!\n\nIn this website,you will find my coursework prepared for this course.\n\n![](images/dog.png){fig-align=\"center\" width=\"323\"}\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
