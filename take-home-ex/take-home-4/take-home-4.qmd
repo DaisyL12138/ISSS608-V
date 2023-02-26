@@ -192,6 +192,61 @@ theme(axis.ticks = element_blank(),
 ```
 :::
 
+::: panel-tabset
+## Import from China in 2022
+
+```{r}
+mChina2022 <- data %>% 
+  filter(area2=='Mainland China ') %>%
+  filter(year=='2022')
+
+
+ggplot(data = mChina2022, 
+       aes(month, 
+           year, 
+           fill =import)) + 
+geom_tile(color = "white", 
+          size = 0.3) + 
+theme_tufte(base_family = NULL) + 
+coord_equal() +
+scale_fill_gradient(name = " Import Volumn (million dollar) ",
+                    limits = c(30000, 95000),
+                    low = 'white', 
+                    high = "Dark green") +
+labs(x = 'Month', 
+     y = 'Year', 
+     title = "Import Volumn from Mainland China in 2022") +
+theme(axis.ticks = element_blank(),
+      plot.title = element_text(hjust = 0.5),
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 6) )
+```
+
+## Export to China in 2022
+
+```{r}
+ggplot(data = mChina2022, 
+       aes(month, 
+           year, 
+           fill =export)) + 
+geom_tile(color = "white", 
+          size = 0.3) + 
+theme_tufte(base_family = NULL) + 
+coord_equal() +
+scale_fill_gradient(name = " Export Volumn (million dollar) ",
+                    limits = c(30000, 95000),
+                    low = 'white', 
+                    high = "Dark green") +
+labs(x = 'Month', 
+     y = 'Year', 
+     title = "Export Volumn from Mainland China in 2022") +
+theme(axis.ticks = element_blank(),
+      plot.title = element_text(hjust = 0.5),
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 6) )
+```
+:::
+
 ```{r}
 #| fig-width: 17
 #| fig-height: 10
@@ -254,6 +309,67 @@ p2<-ggplot() +
       legend.text = element_text(size = 6) )
 ggplotly(p2)
 
+
+```
+
+::: panel-tabset
+## Import About 2022
+
+```{r}
+china2022 <- mChina2022 %>% 
+  group_by(year) %>%
+  summarise(avgvalue = mean(import))
+
+
+p1<-ggplot(data=mChina2022,aes(x=Date, 
+                y=import,group=1)) + 
+  geom_line() +
+  geom_hline(aes(yintercept=avgvalue), 
+             data=china2022, 
+             linetype=6, 
+             colour="blue", 
+             size=0.5) + 
+  labs(axis.text.x = element_blank(),
+       title = "Import with Mainland China") +
+  xlab("") +
+  ylab("Import")+
+  theme(axis.ticks = element_blank(),
+      plot.title = element_text(hjust = 0.5),
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 6) )
+ggplotly(p1)
+```
+
+## Export About 2022
+
+```{r}
+china2022e <- mChina2022 %>% 
+  group_by(year) %>%
+  summarise(avgvalue = mean(export))
+
+p2<-ggplot(data=mChina2022,aes(x=Date, 
+                y=export,group=1)) + 
+  geom_line() +
+  geom_hline(aes(yintercept=avgvalue), 
+             data=china2022e, 
+             linetype=6, 
+             colour="blue", 
+             size=0.5) + 
+  labs(axis.text.x = element_blank(),
+       title = "Export with Mainland China") +
+  xlab("") +
+  ylab("Export")+
+  theme(axis.ticks = element_blank(),
+      plot.title = element_text(hjust = 0.5),
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 6) )
+ggplotly(p2)
+```
+:::
+
+```{r}
+ggplot(data=mChina2022,aes(x=Date, 
+                y=tb,group=1)) + geom_line()
 ```
 
 ```{r}
