@@ -11,7 +11,7 @@ execute:
 ---
 
 ```{r}
-pacman::p_load(stringr,scales, viridis, lubridate, ggthemes, gridExtra, readxl, knitr, data.table, ggHoriPlot, plotly,tidyverse,ggiraph,ggstatsplot, performance,ggHoriPlot,ggplot2)
+pacman::p_load(stringr,scales, viridis, lubridate, ggthemes, gridExtra, readxl, knitr, data.table, ggHoriPlot, plotly,tidyverse,ggiraph,ggstatsplot, performance,ggHoriPlot,ggplot2,braidR)
 ```
 
 ```{r}
@@ -366,6 +366,21 @@ p2<-ggplot(data=mChina2022,aes(x=Date,
 ggplotly(p2)
 ```
 :::
+
+```{r}
+p3<- ggplot()+
+  geom_line(data=mChina2022,aes(x=Date, 
+                y=export,group=1),color='red')+
+  geom_line(data=mChina2022,aes(x=Date, 
+                y=import,group=1),color='blue')
+ggplotly(p3)
+  
+  
+```
+
+```{r}
+
+```
 
 ```{r}
 ggplot(data=mChina2022,aes(x=Date, 
