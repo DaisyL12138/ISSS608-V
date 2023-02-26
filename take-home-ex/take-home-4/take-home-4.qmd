@@ -3,25 +3,282 @@ title: "Take Home Ex 4"
 author: "Daisy"
 format: html
 editor: visual
+date: "`r Sys.Date()`"
+execute: 
+  echo: true   #show out the code chunk
+  eval: true
+  warning: false
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
 ```{r}
-1 + 1
+pacman::p_load(stringr,scales, viridis, lubridate, ggthemes, gridExtra, readxl, knitr, data.table, ggHoriPlot, plotly,tidyverse,ggiraph,ggstatsplot, performance,ggHoriPlot,ggplot2)
 ```
 
-You can add options to executable code like this
-
 ```{r}
-#| echo: false
-2 * 2
+
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+```{r}
+# library(CGPfunctions)
+# Error: package or namespace load failed for ‘CGPfunctions’:'namespace:parameters'没有出口‘standard_error_robust’这个对象
+```
+
+CGPfunctions
+
+```{r}
+im <- read_excel("trade.xlsx",sheet = "T1",range = "A10:UT129")
+ex <- read_excel("trade.xlsx",sheet = "T2",range = "A10:UT101")
+```
+
+```{r}
+kable(head(im))
+```
+
+```{r}
+kable(head(ex))
+```
+
+```{r}
+df<- im[, 0:98]
+```
+
+```{r}
+dfe<- ex[,0:98]
+```
+
+```{r}
+kable(head(df))
+```
+
+```{r}
+df <- df[-1,]
+```
+
+```{r}
+dfe<-dfe[-1,]
+```
+
+```{r}
+colnames <- colnames(df)
+colnames
+
+```
+
+```{r}
+dfim<-pivot_longer(df, cols =c("2023 Jan" ,  "2022 Dec"   , "2022 Nov"  ,  "2022 Oct"  ,  "2022 Sep"  ,  "2022 Aug","2022 Jul" ,   "2022 Jun",    "2022 May",    "2022 Apr" ,   "2022 Mar",    "2022 Feb",    "2022 Jan","2021 Dec" ,   "2021 Nov"   , "2021 Oct",    "2021 Sep",    "2021 Aug" ,   "2021 Jul" ,   "2021 Jun","2021 May"  ,  "2021 Apr",    "2021 Mar" ,   "2021 Feb" ,   "2021 Jan"  ,  "2020 Dec",    "2020 Nov","2020 Oct" ,   "2020 Sep"   , "2020 Aug"  ,  "2020 Jul" ,   "2020 Jun"  ,  "2020 May" ,   "2020 Apr","2020 Mar" ,   "2020 Feb" ,   "2020 Jan"  ,  "2019 Dec"  ,  "2019 Nov"  ,  "2019 Oct"  ,  "2019 Sep" ,  "2019 Aug"   , "2019 Jul"  , "2019 Jun"  ,  "2019 May" ,   "2019 Apr" ,   "2019 Mar"  ,  "2019 Feb" ,  "2019 Jan"  ,  "2018 Dec"  ,  "2018 Nov"  ,  "2018 Oct"  ,  "2018 Sep"  ,  "2018 Aug"  ,  "2018 Jul" ,  "2018 Jun"   ,"2018 May"   , "2018 Apr"  ,  "2018 Mar"  ,  "2018 Feb" ,   "2018 Jan"  ,  "2017 Dec"   ,"2017 Nov"  ,  "2017 Oct"  ,  "2017 Sep" ,   "2017 Aug"  ,  "2017 Jul"  ,  "2017 Jun"   , "2017 May"  , "2017 Apr" ,   "2017 Mar" ,   "2017 Feb" ,   "2017 Jan"  ,  "2016 Dec"   , "2016 Nov" ,   "2016 Oct" , "2016 Sep" ,  "2016 Aug",   "2016 Jul",  "2016 Jun",    "2016 May",    "2016 Apr" ,   "2016 Mar" ,"2016 Feb" ,   "2016 Jan" ,   "2015 Dec" ,   "2015 Nov"  ,  "2015 Oct" ,   "2015 Sep"  ,  "2015 Aug" ,"2015 Jul",    "2015 Jun" ,   "2015 May"   , "2015 Apr" ,   "2015 Mar" ,   "2015 Feb",    "2015 Jan"   ),names_to = "Date", values_to = "import")
+```
+
+```{r}
+dfex<-pivot_longer(dfe, cols =c("2023 Jan" ,  "2022 Dec"   , "2022 Nov"  ,  "2022 Oct"  ,  "2022 Sep"  ,  "2022 Aug","2022 Jul" ,   "2022 Jun",    "2022 May",    "2022 Apr" ,   "2022 Mar",    "2022 Feb",    "2022 Jan","2021 Dec" ,   "2021 Nov"   , "2021 Oct",    "2021 Sep",    "2021 Aug" ,   "2021 Jul" ,   "2021 Jun","2021 May"  ,  "2021 Apr",    "2021 Mar" ,   "2021 Feb" ,   "2021 Jan"  ,  "2020 Dec",    "2020 Nov","2020 Oct" ,   "2020 Sep"   , "2020 Aug"  ,  "2020 Jul" ,   "2020 Jun"  ,  "2020 May" ,   "2020 Apr","2020 Mar" ,   "2020 Feb" ,   "2020 Jan"  ,  "2019 Dec"  ,  "2019 Nov"  ,  "2019 Oct"  ,  "2019 Sep" ,  "2019 Aug"   , "2019 Jul"  , "2019 Jun"  ,  "2019 May" ,   "2019 Apr" ,   "2019 Mar"  ,  "2019 Feb" ,  "2019 Jan"  ,  "2018 Dec"  ,  "2018 Nov"  ,  "2018 Oct"  ,  "2018 Sep"  ,  "2018 Aug"  ,  "2018 Jul" ,  "2018 Jun"   ,"2018 May"   , "2018 Apr"  ,  "2018 Mar"  ,  "2018 Feb" ,   "2018 Jan"  ,  "2017 Dec"   ,"2017 Nov"  ,  "2017 Oct"  ,  "2017 Sep" ,   "2017 Aug"  ,  "2017 Jul"  ,  "2017 Jun"   , "2017 May"  , "2017 Apr" ,   "2017 Mar" ,   "2017 Feb" ,   "2017 Jan"  ,  "2016 Dec"   , "2016 Nov" ,   "2016 Oct" , "2016 Sep" ,  "2016 Aug",   "2016 Jul",  "2016 Jun",    "2016 May",    "2016 Apr" ,   "2016 Mar" ,"2016 Feb" ,   "2016 Jan" ,   "2015 Dec" ,   "2015 Nov"  ,  "2015 Oct" ,   "2015 Sep"  ,  "2015 Aug" ,"2015 Jul",    "2015 Jun" ,   "2015 May"   , "2015 Apr" ,   "2015 Mar" ,   "2015 Feb",    "2015 Jan"   ),names_to = "Date", values_to = "export")
+```
+
+```{r}
+data<- merge(dfim, dfex, by = c("Date", "Data Series"), all.x = TRUE)
+
+
+```
+
+```{r}
+
+colnames(data)[2] <- "area"
+```
+
+```{r}
+data <- data %>%
+  mutate(month = substr(data$Date, start = 6, stop = 9))
+ 
+```
+
+```{r}
+data <- data %>%
+  mutate(year = substr(data$Date, start = 1, stop = 4))
+```
+
+```{r}
+data$month[data$month=='Jan']<-'01'
+data$month[data$month=='Feb']<-'02'
+data$month[data$month=='Mar']<-'03'
+data$month[data$month=='Apr']<-'04'
+data$month[data$month=='May']<-'05'
+data$month[data$month=='Jun']<-'06'
+data$month[data$month=='Jul']<-'07'
+data$month[data$month=='Aug']<-'08'
+data$month[data$month=='Sep']<-'09'
+data$month[data$month=='Oct']<-'10'
+data$month[data$month=='Nov']<-'11'
+data$month[data$month=='Dec']<-'12'
+
+```
+
+```{r}
+data <- data %>%
+  mutate(import = import/(10^2))
+```
+
+```{r}
+data <- data %>%
+  mutate(export = export/(10^2))
+
+```
+
+```{r}
+data <- data %>%
+  mutate(tb = export-import)
+```
+
+```{r}
+data <- data %>%
+  mutate(area1=str_remove(data$area, "(Thousand Dollars)")) 
+  
+
+```
+
+```{r}
+data <- data %>%
+  mutate(area2 = str_remove_all(data$area1, "\\(|\\)"))
+```
+
+::: panel-tabset
+## Import from China
+
+```{r}
+mChina <- data %>% 
+  filter(area2=='Mainland China ')
+
+ggplot(data = mChina, 
+       aes(month, 
+           year, 
+           fill =import)) + 
+geom_tile(color = "white", 
+          size = 0.3) + 
+theme_tufte(base_family = NULL) + 
+coord_equal() +
+scale_fill_gradient(name = " Import Volumn (million dollar) ",
+                    limits = c(30000, 95000),
+                    low = 'white', 
+                    high = "Dark green") +
+labs(x = 'Month', 
+     y = 'Year', 
+     title = "Import Volumn from Mainland China before & after Covid") +
+theme(axis.ticks = element_blank(),
+      plot.title = element_text(hjust = 0.5),
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 6) )
+```
+
+## Export to China
+
+```{r}
+ggplot(data = mChina, 
+       aes(month, 
+           year, 
+           fill =export)) + 
+geom_tile(color = "white", 
+          size = 0.3) + 
+theme_tufte(base_family = NULL) + 
+coord_equal() +
+scale_fill_gradient(name = " Export Volumn (million dollar) ",
+                    limits = c(30000, 95000),
+                    low = 'white', 
+                    high = "Dark green") +
+labs(x = 'Month', 
+     y = 'Year', 
+     title = "Emport Volumn to Mainland China before & after Covid") +
+theme(axis.ticks = element_blank(),
+      plot.title = element_text(hjust = 0.5),
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 6) )
+
+```
+:::
+
+```{r}
+#| fig-width: 17
+#| fig-height: 10
+china <- mChina %>% 
+  group_by(month) %>%
+  summarise(avgvalue = mean(import))
+
+
+p1<-ggplot() + 
+  geom_line(data=mChina,
+            aes(x=year, 
+                y=import, 
+                group=month),
+            colour= "black") +
+  geom_hline(aes(yintercept=avgvalue), 
+             data=china, 
+             linetype=6, 
+             colour="blue", 
+             size=0.5) + 
+  facet_grid(~month) +
+  labs(axis.text.x = element_blank(),
+       title = "Trade Balance with Mainland China") +
+  xlab("") +
+  ylab("Trade Balance")+
+  theme(axis.ticks = element_blank(),
+      plot.title = element_text(hjust = 0.5),
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 6) )
+ggplotly(p1)
+```
+
+```{r}
+#| fig-width: 17
+#| fig-height: 10
+
+echina <- mChina %>% 
+  group_by(month) %>%
+  summarise(avg = mean(export))
+
+
+p2<-ggplot() + 
+  geom_line(data=mChina,
+            aes(x=year, 
+                y=export, 
+                group=month), 
+            colour= "black") +
+  geom_hline(aes(yintercept=avg), 
+             data=echina, 
+             linetype=6, 
+             colour="blue", 
+             size=0.5) + 
+  facet_grid(~month) +
+  labs(axis.text.x = element_blank(),
+       title = "Trade Balance with Mainland China") +
+  xlab("") +
+  ylab("Trade Balance")+
+  theme(axis.ticks = element_blank(),
+      plot.title = element_text(hjust = 0.5),
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 6) )
+ggplotly(p2)
+
+```
+
+```{r}
+rank<- data %>%
+  filter(year==2015) %>%
+  group_by(area2,year) %>%
+  summarize(import=sum(import),export=sum(export),area2=area2) %>%
+  distinct(area2,year,import) %>%
+  arrange(desc(import)) 
+
+```
+
+```{r}
+top_n(rank,n=10,wt=import)
+
+```
+
+```{r}
+
+```
+
+``` r
+newggslopegraph(year, import, area2,
+
+Title = "import fropm Top 10 Counties",
+
+SubTitle = "2015-2022")
+```

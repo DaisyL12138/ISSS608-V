@@ -21,8 +21,7 @@ website:
           href: "take-home-ex/take-home-3/takehome3.qmd"
         - text: "Take-Home 4"
           href: "take-home-ex/take-home-4/take-home-4.qmd"
-        - text: "Take-Home 5"
-          href: "take-home-ex/take-home-5/takehome5.qmd"
+
     - text: "In Class Exercise"
       menu:
         - text: "In-Class 3"
@@ -31,6 +30,8 @@ website:
           href: "in-class/in-class-4.qmd"
         - text: "In-Class 5"
           href: "in-class/in-class-5.qmd"
+        - text: "In-Class 7"
+          href: "in-class/in-class-7.qmd"
      
     right:
       - href: index.qmd
