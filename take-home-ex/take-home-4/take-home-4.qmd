@@ -369,7 +369,11 @@ ggplotly(p2)
 
 ```{r}
 ggplot(data=mChina2022,aes(x=Date, 
-                y=tb,group=1)) + geom_line()
+                y=tb,group=1)) + geom_line()+
+  labs(axis.text.x = element_blank(),
+       title = "Trade Balance with Mainland China") +
+  xlab("") +
+  ylab("")
 ```
 
 ```{r}
